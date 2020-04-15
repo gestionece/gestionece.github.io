@@ -339,6 +339,25 @@ input:focus, textarea, button {
   border: none;
   border-bottom: 1px solid #555;
 }
+
+.bottom_nav .input_wrap input[type=text] { 
+  text-transform: uppercase;
+}
+.bottom_nav .input_wrap input[type=text]::-webkit-input-placeholder { /* WebKit browsers */
+  text-transform: none;
+}
+.bottom_nav .input_wrap input[type=text]:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+  text-transform: none;
+}
+.bottom_nav .input_wrap input[type=text]::-moz-placeholder { /* Mozilla Firefox 19+ */
+  text-transform: none;
+}
+.bottom_nav .input_wrap input[type=text]::-ms-input-placeholder { /* Internet Explorer 10+ */
+  text-transform: none;
+}
+.bottom_nav .input_wrap input[type=text]::placeholder { /* Recent browsers */
+  text-transform: none;
+}
 /* End Bottom Bar */
 
 
