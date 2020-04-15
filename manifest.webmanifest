@@ -1,0 +1,40 @@
+{
+  "manifest_version": 1,
+  "type": "WebApp",
+  "short_name": "GestioneCE",
+  "name": "GestioneCE App",
+  "description": "Applicazine per gestire i contatori ENEL.",
+  "meta": {
+    "name": "GestioneCE",
+    "author": "Dzyuba Ruslan",
+    "version": "1.0.1"
+  },
+  "icons": [
+    {
+      "src": "/resources/img/icon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ],
+  "app": {
+    "urls": [
+      "/"
+    ],
+    "launch": {
+      "web_url": "/",
+      "container": "panel",
+      "height": 550,
+      "width": 350,
+      "minHeight":550,
+      "minWidth":350,
+      "maxHeight":550,
+      "maxWidth":350      
+    }
+  },
+  "start_url": "/index.html",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#4CAF50",
+  "theme_color": "#4CAF50"
+}
