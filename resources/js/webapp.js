@@ -23,16 +23,20 @@ $(document).ready(function () {
         deferredPrompt.userChoice.then((choiceResult) => {
             if (choiceResult.outcome === 'accepted') {
                 console.log('User accepted the install prompt');
+                localStorage.uRifiute = true;
+                userRifiute = true;
+                deferredPrompt = null;
+        
+                location.reload();
             } else {
+                localStorage.uRifiute = true;
+                userRifiute = true;
+                deferredPrompt = null;
+        
+                location.reload();
                 console.log('User dismissed the install prompt');
             }
         });
-
-        localStorage.uRifiute = true;
-        userRifiute = true;
-        deferredPrompt = null;
-
-        location.reload();
     }
 
     window.addEventListener('beforeinstallprompt', (e) => {
