@@ -28,7 +28,7 @@ function listCam() {
                     if (s.options[i].innerHTML == this.innerHTML) {                
                         s.selectedIndex = i;
 
-                        selectedDeviceId = s.selectedIndex.value;
+                        selectedDeviceId = $('#sourceSelect option')[i].value;                        
 
                         h.innerHTML = this.innerHTML;
                         y = this.parentNode.getElementsByClassName("same-as-selected");
@@ -140,10 +140,9 @@ window.addEventListener('load', function () {
                             }, 3000);
 
 
+                            AddCE(result.text);
 
-                            ////..........
-                            console.log(result)
-                            //document.getElementById('result').textContent = result.text
+                            console.log(result);
                         }
                         if (err && !(err instanceof ZXing.NotFoundException)) {
                             console.error(err)
