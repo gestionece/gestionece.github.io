@@ -20,12 +20,16 @@ function listCam() {
             c.addEventListener("click", function (e) {
                 /*when an item is clicked, update the original select box,
                 and the selected item:*/
+
                 var y, i, k, s, h;
                 s = this.parentNode.parentNode.getElementsByTagName("select")[0];
                 h = this.parentNode.previousSibling;
                 for (i = 0; i < s.length; i++) {
-                    if (s.options[i].innerHTML == this.innerHTML) {
+                    if (s.options[i].innerHTML == this.innerHTML) {                
                         s.selectedIndex = i;
+
+                        selectedDeviceId = s.selectedIndex.value;
+
                         h.innerHTML = this.innerHTML;
                         y = this.parentNode.getElementsByClassName("same-as-selected");
                         for (k = 0; k < y.length; k++) {
@@ -35,6 +39,7 @@ function listCam() {
                         break;
                     }
                 }
+
                 h.click();
             });
             b.appendChild(c);
@@ -73,8 +78,6 @@ function listCam() {
     document.addEventListener("click", closeAllSelect);
 }
 
-
-
 window.addEventListener('load', function () {
     let selectedDeviceId;
     var torchON = false;
@@ -82,8 +85,10 @@ window.addEventListener('load', function () {
     console.log('ZXing code reader initialized')
     codeReader.getVideoInputDevices()
         .then((videoInputDevices) => {
+
             const sourceSelect = document.getElementById('sourceSelect')
             selectedDeviceId = videoInputDevices[0].deviceId
+
             if (videoInputDevices.length >= 1) {
                 videoInputDevices.forEach((element) => {
                     const sourceOption = document.createElement('option')
@@ -91,7 +96,7 @@ window.addEventListener('load', function () {
                     sourceOption.value = element.deviceId
                     sourceSelect.appendChild(sourceOption)
                 })
-
+                
                 sourceSelect.onchange = () => {
                     selectedDeviceId = sourceSelect.value;
                 };
