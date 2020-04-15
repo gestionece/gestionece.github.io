@@ -1,0 +1,757 @@
+/* ---------- Options ---------- */
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
+}
+
+/* ---------- Toggle Menu  ---------- */
+/*Thanks of -> https://codepen.io/agragregra/pen/bEbbmZ*/
+.toggle-mnu {
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+}
+.toggle-mnu span,
+.toggle-mnu span:after,
+.toggle-mnu span:before {
+  width: 100%;
+  height: 2px;
+  background-color: #000;
+  transition: all 0.3s;
+  backface-visibility: hidden;
+  border-radius: 2px;
+}
+.toggle-mnu span {
+  position: relative;
+  display: block;
+}
+.toggle-mnu span::before,
+.toggle-mnu span:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: -9px;
+}
+.toggle-mnu span:after {
+  top: 9px;
+}
+.toggle-mnu.on span {
+  background-color: transparent;
+}
+.toggle-mnu.on span:before {
+  transform: rotate(45deg) translate(0px, 0px);
+  top: 0px;
+}
+
+.toggle-mnu.on span:after {
+  transform: rotate(-45deg) translate(0px, 0px);
+  top: 0px;
+}
+/* End Toggle*/
+
+/* ---------- Swich  ---------- */
+/*Thanks of -> https://codepen.io/hmufti/pen/gmRXMe/*/
+input.switch  {
+  font-size: 1.25em; /*<-  change size*/
+
+  height: 0.7em;
+  display: inline-flex;
+  align-items: center;
+  width: 1.65em;
+  position: relative;
+  margin: 0.15em 0;
+}
+
+.switch::before {
+  content: "";
+  display: inline-flex;
+  position: absolute;
+
+  height: 0.8em;
+  width: 1.4em;
+  padding: 0 0.2em;
+  background: #BDB9A6;
+  border-radius: 1em;
+
+  -webkit-transition: all 300ms;
+     -moz-transition: all 300ms;
+          transition: all 300ms;
+}
+
+.switch::after {
+  content: "";
+  display: inline-flex;
+  position: absolute;
+
+  height: 1em;
+  width: 1em;
+  border-radius: 1em;
+  background: #FFF;
+  box-shadow: 0 0.1em 0.3em rgba(0,0,0,0.3);
+  -webkit-transition: all 300ms;
+     -moz-transition: all 300ms;
+          transition: all 300ms;
+}
+
+input.switch:checked::after {
+  -webkit-transform: translateX(80%);
+     -moz-transform: translateX(80%);
+          transform: translateX(80%);
+}
+
+input.switch:checked::before {
+  background: #4CAF50;
+}
+
+input.switch:disabled::before,
+input.switch:disabled::after {
+  background: #ccc;
+}
+/* End Swich*/
+
+/* ---------- Scrollable container with dynamic height ---------- */
+/*Thanks of -> https://codepen.io/stephenbunch/pen/KWBNVo */
+.container {
+  /* give the outermost container a predefined size */
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  
+  display: flex;
+  flex-direction: column;
+}
+
+.section {
+  flex-grow: 1;
+  
+  display: flex;
+  flex-direction: column;
+  
+  /* for Firefox */
+  min-height: 0;
+}
+
+.scrollable-content {
+  flex-grow: 1;
+  
+  overflow-x: auto;
+  
+  /* for Firefox */
+  min-height: 0;
+}
+/* End Scrollable container with dynamic height*/
+
+/* ---------- General ---------- */
+body, html {
+  margin: 0;
+  padding: 0;
+
+  -webkit-tap-highlight-color: transparent;
+
+  font-family: 'Roboto Mono', monospace;
+  font-size: 16px;
+
+  background-color: #3A4750;
+
+  overflow: hidden;
+
+  /*overscroll-behavior: none; /*disabling Pull-to-Refresh*/
+}
+
+input:focus, textarea, button {
+  outline: none !important;
+  cursor: pointer;
+}
+
+.dashboard_mobile {
+  background-color: #3A4750;
+
+  position: fixed;
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.right {
+  float: right;
+}
+
+.clearfix {
+  overflow: auto;
+}
+
+/* Start ScrollBar*/
+::-webkit-scrollbar {
+  width: 2px;
+  height: 1px;
+}
+::-webkit-scrollbar-button {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-thumb {
+  background: #4CAF50;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+/* End ScrollBar*/
+
+/* Start Top Bar */
+.dashboard_mobile .top_nav {
+  overflow: hidden;
+  background-color: #4CAF50;
+
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+  position: fixed;
+  left: 0%;
+  right: 0%;
+  top: 0px;
+
+  z-index: 1;
+}
+
+.dashboard_mobile .top_nav label {
+  float: left;
+  color: #000;
+  text-align: center;
+  padding: 20px 0 20px 22px;
+  text-decoration: none;
+  font-size: 1.375em;
+
+  box-shadow: none;
+}
+
+.dashboard_mobile .top_nav button#options {
+  background-color: transparent;
+  border: none;
+  font-size: 1.375em;
+  padding: 20px 22px;
+}
+/* End Top Bar */
+
+/* Start Bottom Bar */
+.toggle-mnu.toggle-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+
+.bottom_nav .toggle-btn {
+  background-color: #4CAF50;  
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 50%;
+  padding: 15px;
+
+  border: 1px solid #6dfd72;
+}
+
+.bottom_nav .button_wrap .button_toggle .toggle-btn:hover {
+  color: #555;
+}
+
+.bottom_nav .button_wrap .button_toggle {
+  position: fixed;
+  bottom: 35px;
+  right: 20px;
+
+  width: 60px;
+
+  padding-bottom: 50px;
+  text-align: center;
+
+  display: none;
+}
+
+.bottom_nav .button_wrap .button_toggle .toggle-btn{
+  background-color: #6bf56f;
+  color: #000;
+  
+  text-decoration: none;
+
+  display: inline-block;
+
+  margin: 5px 0;
+
+  height: 52px;
+  width: 52px;
+}
+
+.bottom_nav .bottom_nav .button_toggle .toggle-btn i {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bottom_nav .input_wrap {
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+
+  width: 100%;
+
+  display: none;
+}
+
+.bottom_nav .input_border {
+  background-color: #4CAF50;  
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
+  border: 1px solid #6dfd72;
+
+  padding: 8px;
+  margin: 6px 0;
+
+  float: right;
+
+  width: 95%;
+  width: -webkit-calc(100% - 125px);
+  width:    -moz-calc(100% - 125px);
+  width:         calc(100% - 125px);
+  max-width: 300px;
+}
+
+.bottom_nav .input_wrap input[type=text] {
+  background-color: #4CAF50;
+  border: none;
+  border-radius: 0;
+  border-bottom: 1px solid #000;
+
+  font-size: 1.34375em;
+
+  
+  width: 90%; /*iphone*/
+  width: 100%;
+}
+
+.bottom_nav .input_wrap input[type=text]:hover {
+  border: none;
+  border-bottom: 1px solid #555;
+}
+/* End Bottom Bar */
+
+
+/* Start List */
+.dashboard_mobile .scrollable-content.containerList {
+  margin-top: 60px;
+  padding-bottom: 60px;
+}
+
+.dashboard_mobile ul.listCE {
+  color: #fff;
+  padding: 0px;
+  list-style-type: none;
+}
+
+.dashboard_mobile ul.listCE > li {
+  background: #43525c;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+
+  font-size: 1.25em;
+
+  padding: 15px;
+
+  margin: 8px 10px;
+}
+
+.dashboard_mobile ul.listCE > li > i{
+  float: right;
+
+  font-size: 1.25em;
+}
+/* End List */
+
+/* Start PopOut */
+.pop_up {
+  background-color: rgb(34, 42, 48);
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+
+  opacity: 0.8;
+
+
+  border-radius: 15px;
+
+  position: fixed;
+  margin: 5% auto; /* Will not center vertically and won't work in IE6/7. */
+  padding: 5px;
+  left: 0;
+  right: 0;
+
+  bottom: 10%;
+  width: 60%;
+
+  text-align: center;
+  color: #fff;
+
+  display: none;
+}
+.pop_up label {
+  margin: 0;
+  display: block;
+}
+
+.pop_up .tittle {
+  font-size: 1.125em;
+}
+/* End PopOut*/
+
+/* Start Swal */
+.swal-overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.swal-icon--success:before,
+.swal-icon--success:after,
+.swal-icon--success__hide-corners{
+  background-color: #38373c;
+}
+
+.swal-modal {
+  background-color: #38373c;
+}
+
+.swal-title { 
+  color: #fff;
+}
+
+.swal-text {
+  color: #fff;
+}
+
+.swal-overlay .swal-footer .swal-button {
+  background-color: transparent;
+  color: #4CAF50;
+
+  box-shadow: none;
+}
+/* End Swal */
+
+/* Start CamBox*/
+.cam_box {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  padding: 0 3.5vw;
+
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+
+  display: none;
+}
+
+.cam_box .box{
+  background-color: #38373c;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+
+  border-radius: 5px;
+
+  padding: 72px 10px 0px 10px;
+  margin: 0 auto;
+  max-width: 350px;
+
+  display: none;
+}
+
+.cam_box .box .camWrapper {
+  max-width: 350px;
+  margin: 0 auto;
+  border: 1px solid #4CAF50;
+
+  position: relative;
+
+  /*min-height: 150px;*/
+}
+
+.cam_box .box .camWrapper:after {
+  content: "";
+  display: block;
+  padding-bottom: 70%;
+}
+
+.cam_box .box .camWrapper video#video,
+.cam_box .box .camWrapper canvas#canvas {
+  position: absolute;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.cam_box .box .btnBar {
+  direction: rtl;
+}
+
+.cam_box .box .btnBar button{ 
+  background-color: transparent;
+  border: none;
+  color: #4CAF50;
+  font-size: 1em;
+  margin: 10px;
+}
+/* End CamBox*/
+
+/* Start Options */
+.options_box {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+
+  z-index: 1;
+
+  display: none;
+}
+
+.options_box .clicToClose {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.options_box .box{
+  background-color: #3A4750;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+
+  position: absolute;
+
+  max-width: 300px;
+  right: 35vw;
+  top: 0;
+  bottom: 0;
+  left: 0;
+
+  transform: translateX(-100%);
+  transition: transform 0.25s ease;
+}
+
+.options_box .box.on{
+  transform: translateX(0);
+}
+
+.dashboard_mobile .options_box .scrollable-content {
+  margin-top: 46px;
+  margin-bottom: 32px;
+}
+
+
+.options_box h2 {
+  margin: 0 0 10px 0;
+}
+
+.options_box .container_opt{
+  background-color: #43525c;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+  padding: 10px;
+  margin-bottom: 10px;
+
+  /*border: 1px solid #4CAF50;
+  margin: 15px;*/
+}
+
+.options_box [class^="option"] {
+  margin-bottom: 10px;
+  margin-left: 10px;
+  display: block;
+}
+
+.options_box .option-select label {
+  font-size: 0.8em;
+}
+
+.options_box .wrap_a2hs {
+  padding: 0;
+  display: none;
+  
+  margin-top: 22px;
+}
+
+.options_box #a2hsBtn {
+  border: none;
+  width: 100%;
+  padding: 10px;
+  background-color: #4CAF50;
+  font-size: 1.25em;
+}
+
+.options_box .topBar {
+  background-color: #43525c;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  padding: 10px;
+}
+
+.options_box .topBar button {
+  background-color: transparent;
+  border: none;
+  color: #fff;
+}
+
+.options_box .topBar span {
+  font-size: 1.5625em;
+}
+
+.options_box .bottomBar {
+  background-color: #43525c;
+  box-shadow: 0px -4px 4px rgba(0, 0, 0, 0.25);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 10px;
+}
+
+.options_box .bottomBar a {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 5px;
+}
+
+.options_box input.switch {
+  margin-right: 5px;
+}
+/* End Options */
+
+
+
+
+
+
+/* Start Select*/
+/*the container must be positioned relative:*/
+.custom-select {
+  -webkit-tap-highlight-color: transparent;
+  position: relative;
+  white-space: nowrap;
+
+  border: 1px solid #4caf50;
+  background-color: #3a4750;
+}
+
+.custom-select select {
+  display: none; /*hide original SELECT element:*/
+}
+
+.select-selected {
+  background-color: transparent;
+}
+
+/*style the arrow inside the select element:*/
+.select-selected:after {
+  position: absolute;
+  content: "";
+  top: 0.7em;
+  right: 0.5em;
+  width: 0;
+  height: 0;
+  border: 0.375em solid transparent;
+  border-color: #fff transparent transparent transparent;
+}
+
+/*point the arrow upwards when the select box is open (active):*/
+.select-selected.select-arrow-active:after {
+  border-color: transparent transparent #fff transparent;
+  top: 0.34em;
+}
+
+/*style the items (options), including the selected item:*/
+.select-items div, .select-selected {
+  -webkit-tap-highlight-color: transparent;
+  font-size: 0.9em;
+  font-family: Arial;
+  background-color: transparent;
+  color: #ffffff;
+  padding: 4px 8px;
+  border: none;
+  border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+  cursor: pointer;
+  user-select: none;
+  padding-right: 1.5em;
+
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+/*style items (options):*/
+.select-items {
+  position: absolute;
+  background-color: #3a4750;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 99;
+
+  border: 1px solid #4caf50;
+}
+
+/*hide the items when the select box is closed:*/
+.select-hide {
+  display: none;
+}
+
+.select-items div:hover, .same-as-selected {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+/* End Select*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* media */
+@media screen and (max-width: 345px) {
+  body {
+    font-size: 14px;
+  }
+}
+
+@media screen and (min-width: 645px) {
+  body {
+    font-size: 20px;
+  }
+}
+
+@media screen and (max-width: 315px) {
+  body {
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 280px) {
+  .dashboard_mobile {
+    display: none;
+  }
+}
+
