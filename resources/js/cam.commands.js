@@ -28,6 +28,7 @@ function listCam() {
                     if (s.options[i].innerHTML == this.innerHTML) {                
                         s.selectedIndex = i;
 
+                        alert( $('#sourceSelect option')[i].value );
                         selectedDeviceId = $('#sourceSelect option')[i].value;                        
 
                         h.innerHTML = this.innerHTML;
