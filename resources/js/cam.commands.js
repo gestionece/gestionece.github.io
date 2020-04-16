@@ -25,12 +25,12 @@ function listCam() {
                 s = this.parentNode.parentNode.getElementsByTagName("select")[0];
                 h = this.parentNode.previousSibling;
                 for (i = 0; i < s.length; i++) {
-                    if (s.options[i].innerHTML == this.innerHTML) {                
+                    if (s.options[i].innerHTML == this.innerHTML) {
                         s.selectedIndex = i;
 
-                        alert( $('#sourceSelect option')[i].value );
+                        alert($('#sourceSelect option')[i].value);
                         showPopUp("Select:", $('#sourceSelect option')[i].value, 500)
-                        selectedDeviceId = $('#sourceSelect option')[i].value;                        
+                        selectedDeviceId = $('#sourceSelect option')[i].value;
 
                         h.innerHTML = this.innerHTML;
                         y = this.parentNode.getElementsByClassName("same-as-selected");
@@ -98,10 +98,12 @@ window.addEventListener('load', function () {
                     sourceOption.value = element.deviceId
                     sourceSelect.appendChild(sourceOption)
                 })
-                
+
                 sourceSelect.onchange = () => {
                     selectedDeviceId = sourceSelect.value;
                 };
+
+                log(selectedDeviceId);
 
                 listCam();
                 document.getElementById('opWrapCamera').style.display = 'block';
