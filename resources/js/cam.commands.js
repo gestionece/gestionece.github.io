@@ -29,6 +29,7 @@ function listCam() {
                         s.selectedIndex = i;
 
                         alert( $('#sourceSelect option')[i].value );
+                        showPopUp("Select:", $('#sourceSelect option')[i].value, 500)
                         selectedDeviceId = $('#sourceSelect option')[i].value;                        
 
                         h.innerHTML = this.innerHTML;
