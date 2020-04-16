@@ -42,7 +42,6 @@ self.addEventListener('install', e => {
  
         '/resources/js/commands.js',
         '/resources/js/library.js',
-        '/resources/js/cam.commands.js',
         '/resources/js/webapp.js', 
  
         '/resources/sound/beep_accept.wav',
