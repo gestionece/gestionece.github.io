@@ -203,6 +203,8 @@ $(document).ready(function () {
                     $(".cam_box").toggle();
                 });
 
+                $('#torchButton').hide();
+
                 console.log('Reset.')
             });
 
