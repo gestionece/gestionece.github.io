@@ -152,7 +152,13 @@ $(document).ready(function () {
 
                 $(".cam_box").toggle();
                 $(".cam_box .box").slideToggle(function () {
+
                     codeReader.decodeFromVideoDevice(selectedDeviceId, 'video', (result, err) => {
+
+                        if( $('#torchButton').is(':visible') == false && codeReader.videoElement.srcObject.getVideoTracks()[0].getCapabilities().torch) {
+                            $('#torchButton').show(); 
+                        }
+
                         if (result) {
 
                             const video = codeReader.videoElement
@@ -174,7 +180,7 @@ $(document).ready(function () {
 
                             setTimeout(function () {
                                 ctx.clearRect(0, 0, canvas.width, canvas.height);
-                            }, 3000);
+                            }, 500);
 
 
                             AddCE(result.text);
@@ -186,10 +192,6 @@ $(document).ready(function () {
                         }
                     })
                     console.log(`Started continous decode from camera with id ${selectedDeviceId}`)
-
-
-
-
                 });
             });
 
@@ -204,7 +206,7 @@ $(document).ready(function () {
                 console.log('Reset.')
             });
 
-            /*
+            
             document.getElementById('torchButton').addEventListener('click', () => {
 
                 if (codeReader.videoElement) {
@@ -216,15 +218,15 @@ $(document).ready(function () {
 
                         torchON = !torchON;
 
+                        console.log('Torch ' + torchON)
+
                         capabilities.applyConstraints({
                             advanced: [{ torch: Boolean(torchON) }]
                         })
                             .catch(e => console.log(e));
                     }
                 }
-
-                console.log('Torch.')
-            })*/
+            });
 
         })
         .catch((err) => {
