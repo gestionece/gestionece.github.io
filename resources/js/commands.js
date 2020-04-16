@@ -29,6 +29,7 @@ function loadlStorage() {
         } else {
             $(" ul#listCE li").remove();
         }
+
     } else {
         alert("Sorry, your browser does not support web storage...");
     }
@@ -118,8 +119,86 @@ function download(data, filename, type) {
     }
 }
 
+function listCam() {
+    var x, i, j, selElmnt, a, b, c;
+    /*look for any elements with the class "custom-select":*/
+    x = document.getElementsByClassName("custom-select");
+    for (i = 0; i < x.length; i++) {
+        selElmnt = x[i].getElementsByTagName("select")[0];
+        /*for each element, create a new DIV that will act as the selected item:*/
+        a = document.createElement("DIV");
+        a.setAttribute("class", "select-selected");
+        a.innerHTML = selElmnt.options[selElmnt.selectedIndex].innerHTML;
+        x[i].appendChild(a);
+        /*for each element, create a new DIV that will contain the option list:*/
+        b = document.createElement("DIV");
+        b.setAttribute("class", "select-items select-hide");
+        for (j = 1; j < selElmnt.length; j++) {
+            /*for each option in the original select element,
+            create a new DIV that will act as an option item:*/
+            c = document.createElement("DIV");
+            c.innerHTML = selElmnt.options[j].innerHTML;
+            c.addEventListener("click", function (e) {
+                /*when an item is clicked, update the original select box,
+                and the selected item:*/
+
+                var y, i, k, s, h;
+                s = this.parentNode.parentNode.getElementsByTagName("select")[0];
+                h = this.parentNode.previousSibling;
+                for (i = 0; i < s.length; i++) {
+                    if (s.options[i].innerHTML == this.innerHTML) {
+                        s.selectedIndex = i;
+                        h.innerHTML = this.innerHTML;
+                        y = this.parentNode.getElementsByClassName("same-as-selected");
+                        for (k = 0; k < y.length; k++) {
+                            y[k].removeAttribute("class");
+                        }
+                        this.setAttribute("class", "same-as-selected");
+                        break;
+                    }
+                }
+
+                h.click();
+            });
+            b.appendChild(c);
+        }
+        x[i].appendChild(b);
+        a.addEventListener("click", function (e) {
+            /*when the select box is clicked, close any other select boxes,
+            and open/close the current select box:*/
+            e.stopPropagation();
+            closeAllSelect(this);
+            this.nextSibling.classList.toggle("select-hide");
+            this.classList.toggle("select-arrow-active");
+        });
+    }
+    function closeAllSelect(elmnt) {
+        /*a function that will close all select boxes in the document,
+        except the current select box:*/
+        var x, y, i, arrNo = [];
+        x = document.getElementsByClassName("select-items");
+        y = document.getElementsByClassName("select-selected");
+        for (i = 0; i < y.length; i++) {
+            if (elmnt == y[i]) {
+                arrNo.push(i)
+            } else {
+                y[i].classList.remove("select-arrow-active");
+            }
+        }
+        for (i = 0; i < x.length; i++) {
+            if (arrNo.indexOf(i)) {
+                x[i].classList.add("select-hide");
+            }
+        }
+    }
+    /*if the user clicks anywhere outside the select box,
+    then close all select boxes:*/
+    document.addEventListener("click", closeAllSelect);
+}
+
 //document.body.requestFullscreen();
 $(document).ready(function () {
+
     let selectedDeviceId;
     var torchON = false;
     const codeReader = new ZXing.BrowserMultiFormatReader()
@@ -127,8 +206,8 @@ $(document).ready(function () {
     codeReader.getVideoInputDevices()
         .then((videoInputDevices) => {
 
-            const sourceSelect = document.getElementById('sourceSelect')
-            selectedDeviceId = videoInputDevices[0].deviceId
+            const sourceSelect = document.getElementById('sourceSelect');
+            selectedDeviceId = videoInputDevices[0].deviceId;
 
             if (videoInputDevices.length >= 1) {
                 videoInputDevices.forEach((element) => {
@@ -138,50 +217,51 @@ $(document).ready(function () {
                     sourceSelect.appendChild(sourceOption)
                 })
 
-                sourceSelect.onchange = () => {
-                    selectedDeviceId = sourceSelect.value;
-                };
-
                 listCam();
                 document.getElementById('opWrapCamera').style.display = 'block';
             }
 
             document.getElementById('camera').addEventListener('click', () => {
+               
+                if (sourceSelect.children[sourceSelect.selectedIndex].value !== "null") {
+                    selectedDeviceId = sourceSelect.children[sourceSelect.selectedIndex].value;
 
-                $("#menu").click();
+                    $("#menu").click();
 
                 $(".cam_box").toggle();
                 $(".cam_box .box").slideToggle(function () {
 
+                    var lastResult;
                     codeReader.decodeFromVideoDevice(selectedDeviceId, 'video', (result, err) => {
 
-                        if( $('#torchButton').is(':visible') == false && codeReader.videoElement.srcObject.getVideoTracks()[0].getCapabilities().torch) {
-                            $('#torchButton').show(); 
+                        if ($('#torchButton').is(':visible') == false && codeReader.videoElement.srcObject.getVideoTracks()[0].getCapabilities().torch) {
+                            $('#torchButton').show();
                         }
 
-                        if (result) {
+                        if (result && lastResult !== result.text) {
 
-                            const video = codeReader.videoElement
-                            const canvas = document.getElementById("canvas");
-                            canvas.width = video.videoWidth;
-                            canvas.height = video.videoHeight;
-                            var ctx = canvas.getContext('2d');
+                            lastResult = result.text;
 
-                            //ctx.drawImage(video, 0, 0);
+                            if ($('#o-DrawLine')[0].checked == true) {
+                                const video = codeReader.videoElement
+                                const canvas = document.getElementById("canvas");
+                                canvas.width = video.videoWidth;
+                                canvas.height = video.videoHeight;
+                                var ctx = canvas.getContext('2d');
 
-                            // Green rectangle
-                            ctx.beginPath();
-                            ctx.lineWidth = "4";
-                            ctx.strokeStyle = "green";
-                            ctx.moveTo(result.resultPoints[0].x, result.resultPoints[0].y);
-                            ctx.lineTo(result.resultPoints[1].x, result.resultPoints[1].y);
-                            //ctx.rect(, res);
-                            ctx.stroke();
+                                // Green rectangle
+                                ctx.beginPath();
+                                ctx.lineWidth = "4";
+                                ctx.strokeStyle = "green";
+                                ctx.moveTo(result.resultPoints[0].x, result.resultPoints[0].y);
+                                ctx.lineTo(result.resultPoints[1].x, result.resultPoints[1].y);
+                                //ctx.rect(, res);
+                                ctx.stroke();
 
-                            setTimeout(function () {
-                                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                            }, 500);
-
+                                setTimeout(function () {
+                                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                                }, 500);
+                            }
 
                             AddCE(result.text);
 
@@ -193,6 +273,11 @@ $(document).ready(function () {
                     })
                     console.log(`Started continous decode from camera with id ${selectedDeviceId}`)
                 });
+
+
+                } else {
+                    swal("Please select SourceCam", "", "error");
+                }
             });
 
             document.getElementById('camClose').addEventListener('click', () => {
@@ -208,7 +293,7 @@ $(document).ready(function () {
                 console.log('Reset.')
             });
 
-            
+
             document.getElementById('torchButton').addEventListener('click', () => {
 
                 if (codeReader.videoElement) {
@@ -234,104 +319,6 @@ $(document).ready(function () {
         .catch((err) => {
             console.error(err)
         })
-
-
-    function listCam() {
-        var x, i, j, selElmnt, a, b, c;
-        /*look for any elements with the class "custom-select":*/
-        x = document.getElementsByClassName("custom-select");
-        for (i = 0; i < x.length; i++) {
-            selElmnt = x[i].getElementsByTagName("select")[0];
-            /*for each element, create a new DIV that will act as the selected item:*/
-            a = document.createElement("DIV");
-            a.setAttribute("class", "select-selected");
-            a.innerHTML = selElmnt.options[selElmnt.selectedIndex].innerHTML;
-            x[i].appendChild(a);
-            /*for each element, create a new DIV that will contain the option list:*/
-            b = document.createElement("DIV");
-            b.setAttribute("class", "select-items select-hide");
-            for (j = 1; j < selElmnt.length; j++) {
-                /*for each option in the original select element,
-                create a new DIV that will act as an option item:*/
-                c = document.createElement("DIV");
-                c.innerHTML = selElmnt.options[j].innerHTML;
-                c.addEventListener("click", function (e) {
-                    /*when an item is clicked, update the original select box,
-                    and the selected item:*/
-
-                    var y, i, k, s, h;
-                    s = this.parentNode.parentNode.getElementsByTagName("select")[0];
-                    h = this.parentNode.previousSibling;
-                    for (i = 0; i < s.length; i++) {
-                        if (s.options[i].innerHTML == this.innerHTML) {
-                            s.selectedIndex = i;
-
-                            selectedDeviceId = $('#sourceSelect option')[i].value;
-
-                            h.innerHTML = this.innerHTML;
-                            y = this.parentNode.getElementsByClassName("same-as-selected");
-                            for (k = 0; k < y.length; k++) {
-                                y[k].removeAttribute("class");
-                            }
-                            this.setAttribute("class", "same-as-selected");
-                            break;
-                        }
-                    }
-
-                    h.click();
-                });
-                b.appendChild(c);
-            }
-            x[i].appendChild(b);
-            a.addEventListener("click", function (e) {
-                /*when the select box is clicked, close any other select boxes,
-                and open/close the current select box:*/
-                e.stopPropagation();
-                closeAllSelect(this);
-                this.nextSibling.classList.toggle("select-hide");
-                this.classList.toggle("select-arrow-active");
-            });
-        }
-        function closeAllSelect(elmnt) {
-            /*a function that will close all select boxes in the document,
-            except the current select box:*/
-            var x, y, i, arrNo = [];
-            x = document.getElementsByClassName("select-items");
-            y = document.getElementsByClassName("select-selected");
-            for (i = 0; i < y.length; i++) {
-                if (elmnt == y[i]) {
-                    arrNo.push(i)
-                } else {
-                    y[i].classList.remove("select-arrow-active");
-                }
-            }
-            for (i = 0; i < x.length; i++) {
-                if (arrNo.indexOf(i)) {
-                    x[i].classList.add("select-hide");
-                }
-            }
-        }
-        /*if the user clicks anywhere outside the select box,
-        then close all select boxes:*/
-        document.addEventListener("click", closeAllSelect);
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     loadlStorage();
@@ -421,7 +408,11 @@ $(document).ready(function () {
     function AddCE(value) {
 
         if (pattCE.test(value)) {
-            beepAccept.play();
+
+            if ($('#o-SoundOn')[0].checked == true) {
+                beepAccept.play();
+            }
+
             const ceCode = pattCE.exec(value)[0];
 
             addCEStorage(ceCode)
@@ -435,11 +426,14 @@ $(document).ready(function () {
                 '</label><i class="fas fa-times"></i></li>');
 
             $('.scrollable-content.containerList').stop().animate({
-                scrollTop: $('#listCE').outerHeight(true) 
+                scrollTop: $('#listCE').outerHeight(true)
             }, 500, 'swing');
 
         } else if (pattCP.test(value)) {
-            beepAlert.play();
+
+            if ($('#o-SoundOn')[0].checked == true) {
+                beepAlert.play();
+            }
 
             const cpCode = pattCP.exec(value)[0];
 
@@ -459,7 +453,9 @@ $(document).ready(function () {
 
 
         } else {
-            beepError.play();
+            if ($('#o-SoundOn')[0].checked == true) {
+                beepError.play();
+            }
         }
     }
     /* End Add CE to List*/
@@ -523,5 +519,10 @@ $(document).ready(function () {
 
 
         return false;
+    });
+
+    $("input[type=checkbox]").change(function() {
+        console.log( $(this) );
+        
     });
 });
