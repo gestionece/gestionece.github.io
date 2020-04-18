@@ -262,6 +262,7 @@ $(document).ready(function () {
                     sourceSelect.appendChild(sourceOption)
                 })
 
+                loadConfig();
 
                 document.getElementById('opWrapCamera').style.display = 'block';
             }
