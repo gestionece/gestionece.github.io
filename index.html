@@ -95,27 +95,23 @@
                                 <h2>General:</h2>
                                 <div class="option">
                                     <label>AutoScroll:</label>
-                                    <input class="switch right" type="checkbox" checked />
+                                    <input id="o-AutoScroll" class="switch right" type="checkbox" checked />
                                 </div>
                                 <div class="option-switch">
                                     <label>DarkMode:</label>
                                     <input class="switch right" type="checkbox" checked disabled />
                                 </div>
                                 <div class="option-switch">
-                                    <label>PopUp:</label>
-                                    <input class="switch right" type="checkbox" checked />
-                                </div>
-                                <div class="option-switch">
-                                    <label>ScanEnable:</label>
-                                    <input class="switch right" type="checkbox" />
-                                </div>
-                                <div class="option-switch">
                                     <label>DoubleCode:</label>
-                                    <input class="switch right" type="checkbox" />
+                                    <input class="switch right" type="checkbox" disabled/>
                                 </div>
                                 <div class="option-switch">
                                     <label>FilterMode:</label>
-                                    <input class="switch right" type="checkbox" checked />
+                                    <input class="switch right" type="checkbox" checked disabled/>
+                                </div>
+                                <div class="option-switch">
+                                    <label>ScanEnable:</label>
+                                    <input class="switch right" type="checkbox" disabled/>
                                 </div>
                                 <div class="option-switch">
                                     <label>SoundOn:</label>
@@ -126,17 +122,17 @@
                             <div id="opWrapCamera" class="container_opt" style="display: none;">
                                 <h2>Camera:</h2>
                                 <div class="option-select">
-                                    <label>Source:</label>
+                                    <label>SourceCam:</label>
                                     <!--surround the select box with a "custom-select" DIV element. Remember to set the width:-->
                                     <div class="custom-select">
-                                        <select id="sourceSelect">
+                                        <select id="o-SourceCam">
                                             <option value="null">-Select Cam-</option>
                                             <!--Injection with JavaScript--> 
                                         </select>
                                     </div>
                                 </div>
                                 <div class="option-switch">
-                                    <label>drawLine:</label>
+                                    <label>DrawLine:</label>
                                     <input id="o-DrawLine" class="switch right" type="checkbox" checked />
                                 </div>
                             </div>
