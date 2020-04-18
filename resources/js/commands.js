@@ -64,7 +64,6 @@ function loadConfig() {
         } else {
             updateConfig()
         }
-        listCam();
 
     } else {
         alert("Sorry, your browser does not support web storage...");
@@ -263,6 +262,7 @@ $(document).ready(function () {
                 })
 
                 loadConfig();
+                listCam();
 
                 document.getElementById('opWrapCamera').style.display = 'block';
             }
@@ -566,25 +566,5 @@ $(document).ready(function () {
 
     $('[id^="o-"]').change(function () {
         updateConfig()
-        //console.log("o-" + $(this).prev().text().substring(0, $(this).prev().text().length - 1));
     });
 });
-
-/*
-{
-  "Options": {
-    "AutoScroll": true,
-    "SoundOn": true,
-    "SourceCam": "bb3939f658476fcb85ace75eeb0ae8d41cb1277d7e8c3b79b6135",
-    "drawLine": true
-  },
-  "CodeScan": {
-    "CodeCP": "CASARS000000273034",
-    "CodeCE": [
-      "04E1G525205087996",
-      "04E1G525205087996",
-      "04E1G525205087996"
-    ]
-  }
-}
-*/
