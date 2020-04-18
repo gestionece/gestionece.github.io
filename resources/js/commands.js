@@ -8,53 +8,89 @@ const pattCP = new RegExp(/CASARS\d{12}/);
 // End Constant
 
 //Start Storage
-function loadlStorage() {
+function loadCodeScan() {
     if (typeof (Storage) !== "undefined") {
-        if (localStorage.CPCode) {
-            $('.top_nav .codeCP').children('b').text(localStorage.CPCode);
+        if (localStorage.CodeScan) {
+            var CodeScan = JSON.parse(localStorage.CodeScan);            
+            if (CodeScan.CodeCP) {
+                $('.top_nav .codeCP').children('b').text(CodeScan.CodeCP);
+            }
+            if (CodeScan.CodeCE) {
+                CodeScan.CodeCE.forEach(function (code) {
+                    $("#listCE").append('<li><label class="count">' +
+                        ($('ul#listCE > li').length + 1).numberFormat('000') +
+                        ': </label><label class="codeCE">' +
+                        pattCE.exec(code)[0] +
+                        '</label><i class="fas fa-times"></i></li>');
+                });
+            }
         } else {
             $('.top_nav .codeCP').children('b').text("ID Carton Pallet");
-        }
-
-        if (localStorage.CECode) {
-
-            var CECodes = JSON.parse(localStorage.CECode);
-            CECodes.forEach(function (code) {
-                $("#listCE").append('<li><label class="count">' +
-                    ($('ul#listCE > li').length + 1).numberFormat('000') +
-                    ': </label><label class="codeCE">' +
-                    pattCE.exec(code)[0] +
-                    '</label><i class="fas fa-times"></i></li>');
-            });
-        } else {
             $(" ul#listCE li").remove();
+            updateCodeScan();
         }
-
     } else {
         alert("Sorry, your browser does not support web storage...");
     }
 }
 
-function addCPStorage(CP) {
+function updateCodeScan() {
     if (typeof (Storage) !== "undefined") {
-        localStorage.CPCode = CP.toString();
+        var CodeScan = {};
+        CodeScan.CodeCP = $('.top_nav .codeCP').children('b').text();
+        var CECodes = [];
+        $('ul#listCE li').each(function (index) {
+            CECodes[CECodes.length] = pattCE.exec($(this).text())[0];
+        });
+        CodeScan.CodeCE = CECodes;
+        localStorage.CodeScan = JSON.stringify(CodeScan);
     } else {
         alert("Sorry, your browser does not support web storage...");
     }
 }
 
-function addCEStorage(CE) {
+function loadConfig() {
     if (typeof (Storage) !== "undefined") {
-        if (localStorage.CECode) {
-            var CECodes = JSON.parse(localStorage.CECode);
-            CECodes[CECodes.length] = CE;
-            localStorage.CECode = JSON.stringify(CECodes);
+        if (localStorage.Config) {
+            var loadConfig = JSON.parse(localStorage.Config);
+            for (nameOption in loadConfig) {
+                var idOptions = "#o-" + nameOption;
+                if (!$(idOptions)[0].checked) {
+                    $(idOptions)[0].value = loadConfig[nameOption];
+                } else {
+                    $(idOptions)[0].checked = loadConfig[nameOption];
+                }       
+            }
         } else {
-            localStorage.CECode = JSON.stringify([CE]);
+            updateConfig()
         }
+        listCam();
+
     } else {
         alert("Sorry, your browser does not support web storage...");
     }
+}
+
+function updateConfig() {
+    if (typeof (Storage) !== "undefined") {
+        var Config = {};
+        $('[id^="o-"]').each(function (index) {
+            var nameOption = removeLastChar($(this).prev().text());
+            if (Boolean(nameOption)) {
+                Config[nameOption] = $(this)[0].checked;
+            } else {
+                nameOption = removeLastChar($(this).parent().prev('label').text());
+                Config[nameOption] = $(this)[0].value;
+            }  
+        });
+        localStorage.Config = JSON.stringify(Config);
+    } else {
+        alert("Sorry, your browser does not support web storage...");
+    }
+}
+
+function removeLastChar(string) {
+    return string.substring(0, string.length - 1)
 }
 //End Storage
 
@@ -64,10 +100,9 @@ function updateNumberList() {
     $('ul#listCE li').each(function (index) {
         $(this).children('label.count').text((index + 1).numberFormat('000') + ': ');
         $(this).children('label.codeCE').text(pattCE.exec($(this).text())[0]);
-
-        CECodes[CECodes.length] = pattCE.exec($(this).text())[0];
-        localStorage.CECode = JSON.stringify(CECodes);
     });
+
+    updateCodeScan();
 }
 
 /* Start PopUp*/
@@ -154,6 +189,10 @@ function listCam() {
                             y[k].removeAttribute("class");
                         }
                         this.setAttribute("class", "same-as-selected");
+
+
+                        updateConfig()
+
                         break;
                     }
                 }
@@ -196,8 +235,14 @@ function listCam() {
     document.addEventListener("click", closeAllSelect);
 }
 
+window.onload = function () {
+    loadConfig();
+};
+
 //document.body.requestFullscreen();
 $(document).ready(function () {
+
+    loadCodeScan();         
 
     let selectedDeviceId;
     var torchON = false;
@@ -206,7 +251,7 @@ $(document).ready(function () {
     codeReader.getVideoInputDevices()
         .then((videoInputDevices) => {
 
-            const sourceSelect = document.getElementById('sourceSelect');
+            const sourceSelect = document.getElementById('o-SourceCam');
             selectedDeviceId = videoInputDevices[0].deviceId;
 
             if (videoInputDevices.length >= 1) {
@@ -217,62 +262,62 @@ $(document).ready(function () {
                     sourceSelect.appendChild(sourceOption)
                 })
 
-                listCam();
+
                 document.getElementById('opWrapCamera').style.display = 'block';
             }
 
             document.getElementById('camera').addEventListener('click', () => {
-               
+
                 if (sourceSelect.children[sourceSelect.selectedIndex].value !== "null") {
                     selectedDeviceId = sourceSelect.children[sourceSelect.selectedIndex].value;
 
                     $("#menu").click();
 
-                $(".cam_box").toggle();
-                $(".cam_box .box").slideToggle(function () {
+                    $(".cam_box").toggle();
+                    $(".cam_box .box").slideToggle(function () {
 
-                    var lastResult;
-                    codeReader.decodeFromVideoDevice(selectedDeviceId, 'video', (result, err) => {
+                        var lastResult;
+                        codeReader.decodeFromVideoDevice(selectedDeviceId, 'video', (result, err) => {
 
-                        if ($('#torchButton').is(':visible') == false && codeReader.videoElement.srcObject.getVideoTracks()[0].getCapabilities().torch) {
-                            $('#torchButton').show();
-                        }
-
-                        if (result && lastResult !== result.text) {
-
-                            lastResult = result.text;
-
-                            if ($('#o-DrawLine')[0].checked == true) {
-                                const video = codeReader.videoElement
-                                const canvas = document.getElementById("canvas");
-                                canvas.width = video.videoWidth;
-                                canvas.height = video.videoHeight;
-                                var ctx = canvas.getContext('2d');
-
-                                // Green rectangle
-                                ctx.beginPath();
-                                ctx.lineWidth = "4";
-                                ctx.strokeStyle = "green";
-                                ctx.moveTo(result.resultPoints[0].x, result.resultPoints[0].y);
-                                ctx.lineTo(result.resultPoints[1].x, result.resultPoints[1].y);
-                                //ctx.rect(, res);
-                                ctx.stroke();
-
-                                setTimeout(function () {
-                                    ctx.clearRect(0, 0, canvas.width, canvas.height);
-                                }, 500);
+                            if ($('#torchButton').is(':visible') == false && codeReader.videoElement.srcObject.getVideoTracks()[0].getCapabilities().torch) {
+                                $('#torchButton').show();
                             }
 
-                            AddCE(result.text);
+                            if (result && lastResult !== result.text) {
 
-                            console.log(result);
-                        }
-                        if (err && !(err instanceof ZXing.NotFoundException)) {
-                            console.error(err)
-                        }
-                    })
-                    console.log(`Started continous decode from camera with id ${selectedDeviceId}`)
-                });
+                                lastResult = result.text;
+
+                                if ($('#o-DrawLine')[0].checked == true) {
+                                    const video = codeReader.videoElement
+                                    const canvas = document.getElementById("canvas");
+                                    canvas.width = video.videoWidth;
+                                    canvas.height = video.videoHeight;
+                                    var ctx = canvas.getContext('2d');
+
+                                    // Green rectangle
+                                    ctx.beginPath();
+                                    ctx.lineWidth = "4";
+                                    ctx.strokeStyle = "green";
+                                    ctx.moveTo(result.resultPoints[0].x, result.resultPoints[0].y);
+                                    ctx.lineTo(result.resultPoints[1].x, result.resultPoints[1].y);
+                                    //ctx.rect(, res);
+                                    ctx.stroke();
+
+                                    setTimeout(function () {
+                                        ctx.clearRect(0, 0, canvas.width, canvas.height);
+                                    }, 500);
+                                }
+
+                                AddCE(result.text);
+
+                                console.log(result);
+                            }
+                            if (err && !(err instanceof ZXing.NotFoundException)) {
+                                console.error(err)
+                            }
+                        })
+                        console.log(`Started continous decode from camera with id ${selectedDeviceId}`)
+                    });
 
 
                 } else {
@@ -314,14 +359,11 @@ $(document).ready(function () {
                     }
                 }
             });
-
         })
         .catch((err) => {
             console.error(err)
         })
 
-
-    loadlStorage();
     //Add Code
 
     // Start click whatsapp
@@ -335,11 +377,10 @@ $(document).ready(function () {
             .then((willDelete) => {
                 if (willDelete) {
 
-                    var MsgWhatsApp = localStorage.CPCode;
-                    JSON.parse(localStorage.CECode).forEach(function (code) {
+                    var MsgWhatsApp =  JSON.parse(localStorage.CodeScan).CodeCP;                    
+                    JSON.parse(localStorage.CodeScan).CodeCE.forEach(function (code) {
                         MsgWhatsApp += '%0D%0A' + code;
                     });
-
                     window.open("https://wa.me/?text=" + MsgWhatsApp, '_blank').focus();
                 }
             });
@@ -358,12 +399,12 @@ $(document).ready(function () {
             .then((willDelete) => {
                 if (willDelete) {
 
-                    var data = localStorage.CPCode;
-                    JSON.parse(localStorage.CECode).forEach(function (code) {
+                    var data = JSON.parse(localStorage.CodeScan).CodeCP;
+                    JSON.parse(localStorage.CodeScan).CodeCE.forEach(function (code) {
                         data += '\n' + code;
                     });
 
-                    download(data, localStorage.CPCode, ".txt")
+                    download(data, JSON.parse(localStorage.CodeScan).CodeCP, ".txt")
 
                     swal({ icon: "success", timer: 1000, });
                 }
@@ -384,9 +425,8 @@ $(document).ready(function () {
             .then((willDelete) => {
                 if (willDelete) {
 
-                    localStorage.removeItem('CECode');
-                    localStorage.removeItem('CPCode');
-                    loadlStorage();
+                    localStorage.removeItem('CodeScan');
+                    loadCodeScan();
 
                     swal({ icon: "success", timer: 1000, });
                 }
@@ -415,8 +455,6 @@ $(document).ready(function () {
 
             const ceCode = pattCE.exec(value)[0];
 
-            addCEStorage(ceCode)
-
             showPopUp("Add:", ceCode, 500)
 
             $("#listCE").append('<li><label class="count">' +
@@ -425,9 +463,13 @@ $(document).ready(function () {
                 ceCode +
                 '</label><i class="fas fa-times"></i></li>');
 
-            $('.scrollable-content.containerList').stop().animate({
-                scrollTop: $('#listCE').outerHeight(true)
-            }, 500, 'swing');
+            if ($('#o-AutoScroll')[0].checked == true) {
+                $('.scrollable-content.containerList').stop().animate({
+                    scrollTop: $('#listCE').outerHeight(true)
+                }, 500, 'swing');
+            }
+
+            updateCodeScan();
 
         } else if (pattCP.test(value)) {
 
@@ -445,9 +487,9 @@ $(document).ready(function () {
             })
                 .then((willDelete) => {
                     if (willDelete) {
-                        addCPStorage(cpCode);
-                        showPopUp("Set Carton Pallet:", cpCode, 1000)
                         $('.top_nav .codeCP').children('b').text(cpCode);
+                        updateCodeScan();
+                        showPopUp("Set Carton Pallet:", cpCode, 1000)
                     }
                 });
 
@@ -521,8 +563,27 @@ $(document).ready(function () {
         return false;
     });
 
-    $("input[type=checkbox]").change(function() {
-        console.log( $(this) );
-        
+    $('[id^="o-"]').change(function () {
+        updateConfig()
+        //console.log("o-" + $(this).prev().text().substring(0, $(this).prev().text().length - 1));
     });
 });
+
+/*
+{
+  "Options": {
+    "AutoScroll": true,
+    "SoundOn": true,
+    "SourceCam": "bb3939f658476fcb85ace75eeb0ae8d41cb1277d7e8c3b79b6135",
+    "drawLine": true
+  },
+  "CodeScan": {
+    "CodeCP": "CASARS000000273034",
+    "CodeCE": [
+      "04E1G525205087996",
+      "04E1G525205087996",
+      "04E1G525205087996"
+    ]
+  }
+}
+*/
