@@ -30,11 +30,8 @@ function loadConfig() {
             var loadConfig = JSON.parse(localStorage.Config);
             for (nameOption in loadConfig) {
                 var idOptions = "#o-" + nameOption;
-                if (!$(idOptions)[0].checked) {
-                    $(idOptions)[0].value = loadConfig[nameOption];
-                } else {
-                    $(idOptions)[0].checked = loadConfig[nameOption];
-                }       
+                $(idOptions)[0].value = loadConfig[nameOption];
+                $(idOptions)[0].checked = loadConfig[nameOption];                    
             }
         } else {
             updateConfig()
