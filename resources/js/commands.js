@@ -361,23 +361,23 @@ $(document).ready(function () {
 
             const ceCode = pattCE.exec(value)[0];
             var exist = false;
-            
+
             if ($('#o-DoubleCode')[0].checked == false) {
-            $('ul#listCE li').each(function () {
-                if (pattCE.exec($(this).text())[0] == ceCode) {
-                    exist = true;
-                    playSound("error");
-                    showPopUp("Exist:", ceCode, 500);
-                    return false;
-                }
-            });
-        }
+                $('ul#listCE li').each(function () {
+                    if (pattCE.exec($(this).text())[0] == ceCode) {
+                        exist = true;
+                        playSound("error");
+                        showPopUp("Exist:", ceCode, 250);
+                        return false;
+                    }
+                });
+            }
 
             if (exist == false) {
                 playSound("accept");
-                showPopUp("Add:", ceCode, 500)
+                showPopUp("Add:", ceCode, 250)
 
-                $("#listCE").append('<li><label class="count">' +
+                $("#listCE").append('<li><label class="count noselect">' +
                     ($('ul#listCE li').length + 1).numberFormat('000') +
                     ': </label><label class="codeCE">' +
                     ceCode +
@@ -408,7 +408,7 @@ $(document).ready(function () {
                     if (willDelete) {
                         $('.top_nav .codeCP').children('b').text(cpCode);
                         updateCodeScan();
-                        showPopUp("Set Carton Pallet:", cpCode, 1000)
+                        showPopUp("Set Carton Pallet:", cpCode, 500)
                     }
                 });
 
@@ -420,27 +420,43 @@ $(document).ready(function () {
     /* End Add CE to List*/
 
     // Start Animated element removal
+    var FastDeleteEnabled = false;
     $('ul#listCE').on('click', 'li i', function () {
 
-        swal({
-            title: "Vuoi eliminare CE?",
-            icon: "warning",
-            dangerMode: true,
-            buttons: true,
-        })
-            .then((willDelete) => {
-                if (willDelete) {
-                    var el = $(this).parents('li');
-                    el.animate({ opacity: '0' }, 100, function () {
-                        el.slideToggle(100, function () {
-                            el.remove();
-                            showPopUp("Removed:", $(this).children('label.codeCE').text(), 500)
-                            updateNumberList();
-                        });
-                    });
-                }
-            });
+
+        if (FastDeleteEnabled == false) {
+            swal({
+                title: "Vuoi eliminare CE?",
+                icon: "warning",
+                dangerMode: true,
+                buttons: true,
+            })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        removeCE($(this).parents('li'));
+
+                        if ($('#o-FastDelete')[0].checked == true) {
+                            FastDeleteEnabled = true;
+                            setTimeout(function () {
+                                FastDeleteEnabled = false;
+                            }, 5000);
+                        }
+                    }
+                });
+        } else {
+            removeCE($(this).parents('li'));
+        }
     });
+
+    function removeCE(element) {
+        element.animate({ opacity: '0' }, 100, function () {
+            element.slideToggle(100, function () {
+                element.remove();
+                showPopUp("Removed:", $(this).children('label.codeCE').text(), 250)
+                updateNumberList();
+            });
+        });
+    }
     // End Animated element removal
 
     /*Start Script For Toggle Menu JQuery*/
