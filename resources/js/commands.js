@@ -125,6 +125,25 @@ function listCam() {
     document.addEventListener("click", closeAllSelect);
 }
 
+function playSound(status) {
+    if ($('#o-SoundOn')[0].checked == true) {
+        var sound = new Audio("/resources/sound/beep_accept.wav");
+
+        switch (status) {
+            case "error":
+                sound = new Audio("/resources/sound/beep_error.wav");
+                break;
+            case "alert":
+                sound = new Audio("/resources/sound/beep_alert.wav");
+                break;
+            case "accept":
+                sound = new Audio("/resources/sound/beep_accept.wav");
+                break;
+        }
+        sound.play();
+    }
+}
+
 //document.body.requestFullscreen();
 $(document).ready(function () {
 
@@ -266,7 +285,7 @@ $(document).ready(function () {
             .then((willDelete) => {
                 if (willDelete) {
 
-                    var MsgWhatsApp =  JSON.parse(localStorage.CodeScan).CodeCP;                    
+                    var MsgWhatsApp = JSON.parse(localStorage.CodeScan).CodeCP;
                     JSON.parse(localStorage.CodeScan).CodeCE.forEach(function (code) {
                         MsgWhatsApp += '%0D%0A' + code;
                     });
@@ -340,33 +359,42 @@ $(document).ready(function () {
 
         if (pattCE.test(value)) {
 
-            if ($('#o-SoundOn')[0].checked == true) {
-                beepAccept.play();
-            }
-
             const ceCode = pattCE.exec(value)[0];
+            var exist = false;
+            
+            if ($('#o-DoubleCode')[0].checked == false) {
+            $('ul#listCE li').each(function () {
+                if (pattCE.exec($(this).text())[0] == ceCode) {
+                    exist = true;
+                    playSound("error");
+                    showPopUp("Exist:", ceCode, 500);
+                    return false;
+                }
+            });
+        }
 
-            showPopUp("Add:", ceCode, 500)
+            if (exist == false) {
+                playSound("accept");
+                showPopUp("Add:", ceCode, 500)
 
-            $("#listCE").append('<li><label class="count">' +
-                ($('ul#listCE li').length + 1).numberFormat('000') +
-                ': </label><label class="codeCE">' +
-                ceCode +
-                '</label><i class="fas fa-times"></i></li>');
+                $("#listCE").append('<li><label class="count">' +
+                    ($('ul#listCE li').length + 1).numberFormat('000') +
+                    ': </label><label class="codeCE">' +
+                    ceCode +
+                    '</label><i class="fas fa-times"></i></li>');
 
-            if ($('#o-AutoScroll')[0].checked == true) {
-                $('.scrollable-content.containerList').stop().animate({
-                    scrollTop: $('#listCE').outerHeight(true)
-                }, 500, 'swing');
+                if ($('#o-AutoScroll')[0].checked == true) {
+                    $('.scrollable-content.containerList').stop().animate({
+                        scrollTop: $('#listCE').outerHeight(true)
+                    }, 500, 'swing');
+                }
+
+                updateCodeScan();
             }
-
-            updateCodeScan();
 
         } else if (pattCP.test(value)) {
 
-            if ($('#o-SoundOn')[0].checked == true) {
-                beepAlert.play();
-            }
+            playSound("alert");
 
             const cpCode = pattCP.exec(value)[0];
 
@@ -386,9 +414,7 @@ $(document).ready(function () {
 
 
         } else {
-            if ($('#o-SoundOn')[0].checked == true) {
-                beepError.play();
-            }
+            playSound("error");
         }
     }
     /* End Add CE to List*/
