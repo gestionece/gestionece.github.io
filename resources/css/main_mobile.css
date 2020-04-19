@@ -458,11 +458,11 @@ input:focus, textarea, button {
 }
 
 .swal-title { 
-  color: var(--textWhite-color);
+  color: #FFF;
 }
 
 .swal-text {
-  color: var(--textWhite-color);
+  color: #FFF;
 }
 
 .swal-overlay .swal-footer .swal-button {
