@@ -90,7 +90,6 @@
                                 </button>
                             </div>
 
-
                             <div class="container_opt">
                                 <h2>General:</h2>
                                 <div class="option">
@@ -99,7 +98,7 @@
                                 </div>
                                 <div class="option-switch">
                                     <label>DarkMode:</label>
-                                    <input class="switch right" type="checkbox" checked disabled />
+                                    <input id="o-DarkMode" onchange="darkMode();" class="switch right" type="checkbox"/>
                                 </div>
                                 <div class="option-switch">
                                     <label>DoubleCode:</label>
@@ -169,6 +168,7 @@
 
     <!-- Script -->
     <script type="text/javascript" src="resources/js/library.js"></script>
+    <script type="text/javascript" src="resources/js/loadConfig.js"></script>
     <script type="text/javascript" src="resources/js/webapp.js"></script>
     <script type="text/javascript" src="resources/js/commands.js"></script>
 </body>
