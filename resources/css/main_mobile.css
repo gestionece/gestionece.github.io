@@ -106,7 +106,7 @@ input.switch  {
   height: 1em;
   width: 1em;
   border-radius: 1em;
-  background-color: #FFF;
+  background-color: white;
   box-shadow: 0 0.1em 0.3em rgba(0,0,0,0.3);
   -webkit-transition: all 300ms;
      -moz-transition: all 300ms;
@@ -428,7 +428,7 @@ input:focus, textarea, button {
   width: 60%;
 
   text-align: center;
-  color: var(--textWhite-color);
+  color: white;
 
   display: none;
 }
@@ -458,11 +458,11 @@ input:focus, textarea, button {
 }
 
 .swal-title { 
-  color: #FFF;
+  color: white;
 }
 
 .swal-text {
-  color: #FFF;
+  color: white;
 }
 
 .swal-overlay .swal-footer .swal-button {
