@@ -1,3 +1,19 @@
+:root {
+  /*document.documentElement.style.setProperty('--primary-color', "#2388d0");*/
+  --primary-color: #4CAF50;
+
+  /*document.documentElement.style.setProperty('--secondary-color', "#c8d0d6");*/
+  --secondary-color: #3A4750;
+
+  /*
+  background-color: var(--secondary-color);
+  filter: brightness(125%);
+  */
+
+  --textWhite-color: #ffffff;
+  --textBlack-color: #000000;
+}
+
 /* ---------- Options ---------- */
 .noselect {
   -webkit-touch-callout: none; /* iOS Safari */
@@ -74,7 +90,7 @@ input.switch  {
   height: 0.8em;
   width: 1.4em;
   padding: 0 0.2em;
-  background: #BDB9A6;
+  background-color: #8a8a8a;/*#BDB9A6;*/
   border-radius: 1em;
 
   -webkit-transition: all 300ms;
@@ -90,7 +106,7 @@ input.switch  {
   height: 1em;
   width: 1em;
   border-radius: 1em;
-  background: #FFF;
+  background-color: #FFF;
   box-shadow: 0 0.1em 0.3em rgba(0,0,0,0.3);
   -webkit-transition: all 300ms;
      -moz-transition: all 300ms;
@@ -104,12 +120,12 @@ input.switch:checked::after {
 }
 
 input.switch:checked::before {
-  background: #4CAF50;
+  background-color: var(--primary-color);
 }
 
 input.switch:disabled::before,
 input.switch:disabled::after {
-  background: #ccc;
+  background-color: #424242;/*#ccc;*/
 }
 /* End Swich*/
 
@@ -157,7 +173,7 @@ body, html {
   font-family: 'Roboto Mono', monospace;
   font-size: 16px;
 
-  background-color: #3A4750;
+  background-color: var(--secondary-color);
 
   overflow: hidden;
 
@@ -170,7 +186,7 @@ input:focus, textarea, button {
 }
 
 .dashboard_mobile {
-  background-color: #3A4750;
+  background-color: var(--secondary-color);;
 
   position: fixed;
   bottom: 0;
@@ -197,7 +213,7 @@ input:focus, textarea, button {
   height: 5px;
 }
 ::-webkit-scrollbar-thumb {
-  background: #4CAF50;
+  background: var(--primary-color);
 }
 ::-webkit-scrollbar-track {
   background: transparent;
@@ -210,7 +226,7 @@ input:focus, textarea, button {
 /* Start Top Bar */
 .dashboard_mobile .top_nav {
   overflow: hidden;
-  background-color: #4CAF50;
+  background-color: var(--primary-color);
 
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 
@@ -224,7 +240,7 @@ input:focus, textarea, button {
 
 .dashboard_mobile .top_nav label {
   float: left;
-  color: #000;
+  color: var(--textBlack-color);
   text-align: center;
   padding: 20px 0 20px 22px;
   text-decoration: none;
@@ -249,12 +265,12 @@ input:focus, textarea, button {
 }
 
 .bottom_nav .toggle-btn {
-  background-color: #4CAF50;  
+  background-color: var(--primary-color); 
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
   border-radius: 50%;
   padding: 15px;
 
-  border: 1px solid #6dfd72;
+  border: none; /*border: 1px solid #6dfd72;*/
 }
 
 .bottom_nav .button_wrap .button_toggle .toggle-btn:hover {
@@ -275,8 +291,8 @@ input:focus, textarea, button {
 }
 
 .bottom_nav .button_wrap .button_toggle .toggle-btn{
-  background-color: #6bf56f;
-  color: #000;
+  color: var(--textBlack-color);
+  filter: brightness(125%);
   
   text-decoration: none;
 
@@ -305,10 +321,10 @@ input:focus, textarea, button {
 }
 
 .bottom_nav .input_border {
-  background-color: #4CAF50;  
+  background-color: var(--primary-color); 
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
   border-radius: 15px;
-  border: 1px solid #6dfd72;
+  border: none; /*border: 1px solid #6dfd72;*/
 
   padding: 8px;
   margin: 6px 0;
@@ -323,7 +339,7 @@ input:focus, textarea, button {
 }
 
 .bottom_nav .input_wrap input[type=text] {
-  background-color: #4CAF50;
+  background-color: var(--primary-color);
   border: none;
   border-radius: 0;
   border-bottom: 1px solid #000;
@@ -368,13 +384,14 @@ input:focus, textarea, button {
 }
 
 .dashboard_mobile ul.listCE {
-  color: #fff;
+  color: var(--textWhite-color);
   padding: 0px;
   list-style-type: none;
 }
 
 .dashboard_mobile ul.listCE > li {
-  background: #43525c;
+  background-color: var(--secondary-color);
+  filter: brightness(125%);
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
 
   font-size: 1.25em;
@@ -411,7 +428,7 @@ input:focus, textarea, button {
   width: 60%;
 
   text-align: center;
-  color: #fff;
+  color: var(--textWhite-color);
 
   display: none;
 }
@@ -441,16 +458,16 @@ input:focus, textarea, button {
 }
 
 .swal-title { 
-  color: #fff;
+  color: var(--textWhite-color);
 }
 
 .swal-text {
-  color: #fff;
+  color: var(--textWhite-color);
 }
 
 .swal-overlay .swal-footer .swal-button {
   background-color: transparent;
-  color: #4CAF50;
+  color: var(--primary-color);
 
   box-shadow: none;
 }
@@ -467,7 +484,7 @@ input:focus, textarea, button {
   padding: 0 3.5vw;
 
   background-color: rgba(0, 0, 0, 0.5);
-  color: #fff;
+  color: var(--textWhite-color);
 
   display: none;
 }
@@ -488,7 +505,7 @@ input:focus, textarea, button {
 .cam_box .box .camWrapper {
   max-width: 350px;
   margin: 0 auto;
-  border: 1px solid #4CAF50;
+  border: 1px solid var(--primary-color);
 
   position: relative;
 
@@ -516,7 +533,7 @@ input:focus, textarea, button {
 .cam_box .box .btnBar button{ 
   background-color: transparent;
   border: none;
-  color: #4CAF50;
+  color: var(--primary-color);
   font-size: 1em;
   margin: 10px;
 }
@@ -531,7 +548,7 @@ input:focus, textarea, button {
   right: 0;
 
   background-color: rgba(0, 0, 0, 0.5);
-  color: #fff;
+  color: var(--textWhite-color);
 
   z-index: 1;
 
@@ -547,7 +564,7 @@ input:focus, textarea, button {
 }
 
 .options_box .box{
-  background-color: #3A4750;
+  background-color: var(--secondary-color);;
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
 
   position: absolute;
@@ -567,7 +584,7 @@ input:focus, textarea, button {
 }
 
 .dashboard_mobile .options_box .scrollable-content {
-  margin-top: 46px;
+  margin-top: 43px;
   margin-bottom: 32px;
 }
 
@@ -577,13 +594,11 @@ input:focus, textarea, button {
 }
 
 .options_box .container_opt{
-  background-color: #43525c;
+  background-color: var(--secondary-color);
+  filter: brightness(125%);
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
   padding: 10px;
   margin: 5px 0;
-
-  /*border: 1px solid #4CAF50;
-  margin: 15px;*/
 }
 
 .options_box [class^="option"] {
@@ -607,12 +622,13 @@ input:focus, textarea, button {
   border: none;
   width: 100%;
   padding: 10px;
-  background-color: #4CAF50;
+  background-color: var(--primary-color);
   font-size: 1.25em;
 }
 
 .options_box .topBar {
-  background-color: #43525c;
+  background-color: var(--secondary-color);
+  filter: brightness(125%);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   position: absolute;
   top: 0;
@@ -624,7 +640,7 @@ input:focus, textarea, button {
 .options_box .topBar button {
   background-color: transparent;
   border: none;
-  color: #fff;
+  color: var(--textWhite-color);
 }
 
 .options_box .topBar span {
@@ -632,7 +648,8 @@ input:focus, textarea, button {
 }
 
 .options_box .bottomBar {
-  background-color: #43525c;
+  background-color: var(--secondary-color);
+  filter: brightness(125%);
   box-shadow: 0px -4px 4px rgba(0, 0, 0, 0.25);
   position: absolute;
   bottom: 0;
@@ -642,7 +659,7 @@ input:focus, textarea, button {
 }
 
 .options_box .bottomBar a {
-  color: #fff;
+  color: var(--textWhite-color);
   text-decoration: none;
   margin: 0 5px;
 }
@@ -664,8 +681,8 @@ input:focus, textarea, button {
   position: relative;
   white-space: nowrap;
 
-  border: 1px solid #4caf50;
-  background-color: #3a4750;
+  border: 1px solid var(--primary-color);
+  background-color: var(--secondary-color);;
 }
 
 .custom-select select {
@@ -700,7 +717,7 @@ input:focus, textarea, button {
   font-size: 0.9em;
   font-family: Arial;
   background-color: transparent;
-  color: #ffffff;
+  color: var(--textWhite-color);
   padding: 4px 8px;
   border: none;
   border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
@@ -715,13 +732,13 @@ input:focus, textarea, button {
 /*style items (options):*/
 .select-items {
   position: absolute;
-  background-color: #3a4750;
+  background-color: var(--secondary-color);;
   top: 100%;
   left: 0;
   right: 0;
   z-index: 99;
 
-  border: 1px solid #4caf50;
+  border: 1px solid var(--primary-color);
 }
 
 /*hide the items when the select box is closed:*/
