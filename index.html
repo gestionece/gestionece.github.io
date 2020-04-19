@@ -63,7 +63,7 @@
             </div>
         </div>
 
-        <div class="cam_box">
+        <div class="cam_box noselect">
             <div class="box">
                 <div class="camWrapper">
                     <video id="video"></video>
@@ -76,7 +76,7 @@
             </div>
         </div>
 
-        <div class="options_box">
+        <div class="options_box noselect">
             <div class="clicToClose"></div>
             <div class="box">
 
@@ -103,6 +103,10 @@
                                 <div class="option-switch">
                                     <label>DoubleCode:</label>
                                     <input id="o-DoubleCode" class="switch right" type="checkbox"/>
+                                </div>
+                                <div class="option-switch">
+                                    <label>FastDelete:</label>
+                                    <input id="o-FastDelete" onchange="FastDeleteEnabled = false" class="switch right" type="checkbox"/>
                                 </div>
                                 <div class="option-switch">
                                     <label>FilterMode:</label>
@@ -167,7 +171,7 @@
             </div>
         </div>
 
-        <div class="pop_up">
+        <div class="pop_up noselect">
             <label class="tittle">Tittle:</label>
             <label class="text">Text</label>
         </div>
