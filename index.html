@@ -57,7 +57,8 @@
                             style="font-size: 25px;"></i></button>
                     <button id="download" class="toggle-btn"><i class="fas fa-file-download fa-lg"></i></button>
                     <button id="newFile" class="toggle-btn"><i class="far fa-file fa-lg"></i></button>
-                    <button id="camera" class="toggle-btn" style="display: none;"><i class="fas fa-camera fa-lg"></i></button>
+                    <button id="camera" class="toggle-btn" style="display: none;"><i
+                            class="fas fa-camera fa-lg"></i></button>
                 </div>
                 <button id="menu" class="toggle-mnu toggle-btn"><span></span></button>
             </div>
@@ -92,41 +93,14 @@
 
                             <div class="container_opt">
                                 <h2>General:</h2>
-                                <div class="option">
-                                    <label>AutoScroll:</label>
-                                    <input id="o-AutoScroll" class="switch right" type="checkbox" checked />
-                                </div>
                                 <div class="option-switch">
                                     <label>DarkMode:</label>
-                                    <input id="o-DarkMode" onchange="darkMode();" class="switch right" type="checkbox" checked/>
-                                </div>
-                                <div class="option-switch">
-                                    <label>DoubleCode:</label>
-                                    <input id="o-DoubleCode" class="switch right" type="checkbox"/>
-                                </div>
-                                <div class="option-switch">
-                                    <label>FastDelete:</label>
-                                    <input id="o-FastDelete" onchange="FastDeleteEnabled = false" class="switch right" type="checkbox"/>
-                                </div>
-                                <div class="option-switch">
-                                    <label>FilterMode:</label>
-                                    <input class="switch right" type="checkbox" checked disabled/>
-                                </div>
-                                <div class="option-switch">
-                                    <label>ScanEnable:</label>
-                                    <input class="switch right" type="checkbox" disabled/>
+                                    <input id="o-DarkMode" onchange="darkMode();" class="switch right" type="checkbox"
+                                        checked />
                                 </div>
                                 <div class="option-switch">
                                     <label>SoundOn:</label>
                                     <input id="o-SoundOn" class="switch right" type="checkbox" checked />
-                                </div>
-                                <div class="option-switch">
-                                    <label>UpperCase:</label>
-                                    <input class="switch right" type="checkbox" checked disabled/>
-                                    <!--
-                                        Se voglio agiungere UpperCase devo mettere una condizione in file commands.js line 339
-                                        e dove campiare css che fa vedere UpperCase
-                                    -->
                                 </div>
                             </div>
 
@@ -138,7 +112,7 @@
                                     <div class="custom-select">
                                         <select id="o-SourceCam">
                                             <option value="null">-Select Cam-</option>
-                                            <!--Injection with JavaScript--> 
+                                            <!--Injection with JavaScript-->
                                         </select>
                                     </div>
                                 </div>
@@ -148,7 +122,38 @@
                                 </div>
                             </div>
 
- 
+                            <div class="container_opt">
+                                <h2>Scan:</h2>
+                                <div class="option">
+                                    <label>AutoScroll:</label>
+                                    <input id="o-AutoScroll" class="switch right" type="checkbox" checked />
+                                </div>
+                                <div class="option-switch">
+                                    <label>DoubleCode:</label>
+                                    <input id="o-DoubleCode" class="switch right" type="checkbox" />
+                                </div>
+                                <div class="option-switch">
+                                    <label>FastDelete:</label>
+                                    <input id="o-FastDelete" onchange="FastDeleteEnabled = false" class="switch right"
+                                        type="checkbox" />
+                                </div>
+                                <div class="option-switch">
+                                    <label>FilterMode:</label>
+                                    <input class="switch right" type="checkbox" checked disabled />
+                                </div>
+                                <div class="option-switch">
+                                    <label>ScanEnable:</label>
+                                    <input class="switch right" type="checkbox" disabled />
+                                </div>
+                                <div class="option-switch">
+                                    <label>UpperCase:</label>
+                                    <input class="switch right" type="checkbox" checked disabled />
+                                    <!--
+                                        Se voglio agiungere UpperCase devo mettere una condizione in file commands.js line 339
+                                        e dove campiare css che fa vedere UpperCase
+                                    -->
+                                </div>
+                            </div>
 
                         </div>
                     </div>
