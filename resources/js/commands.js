@@ -336,6 +336,8 @@ $(document).ready(function () {
     /* Start Add CE to List*/
     function AddCE(value) {
 
+        value = value.toUpperCase();
+
         if (pattCE.test(value)) {
 
             if ($('#o-SoundOn')[0].checked == true) {
