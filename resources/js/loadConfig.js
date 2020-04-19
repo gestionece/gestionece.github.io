@@ -1,8 +1,4 @@
 // Start Constant
-const beepError = new Audio("/resources/sound/beep_error.wav");
-const beepAccept = new Audio("/resources/sound/beep_accept.wav");
-const beepAlert = new Audio("/resources/sound/beep_alert.wav");
-
 const pattCE = new RegExp(/\d{2}[A-Z]\d[A-Z](\d|[A-Z]){4}\d{8}/);
 const pattCP = new RegExp(/CASARS\d{12}/);
 // End Constant
