@@ -703,12 +703,12 @@ input:focus, textarea, button {
   width: 0;
   height: 0;
   border: 0.375em solid transparent;
-  border-color: #fff transparent transparent transparent;
+  border-color: var(--primary-color) transparent transparent transparent;
 }
 
 /*point the arrow upwards when the select box is open (active):*/
 .select-selected.select-arrow-active:after {
-  border-color: transparent transparent #fff transparent;
+  border-color: transparent transparent var(--primary-color) transparent;
   top: 0.34em;
 }
 
