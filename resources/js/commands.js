@@ -151,6 +151,8 @@ $(document).ready(function () {
                 listCam();
 
                 document.getElementById('opWrapCamera').style.display = 'block';
+                document.getElementById('camera').style.display = 'inline-block';
+
             }
 
             document.getElementById('camera').addEventListener('click', () => {
