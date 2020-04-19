@@ -69,7 +69,7 @@ function loadCodeScan() {
             }
             if (CodeScan.CodeCE) {
                 CodeScan.CodeCE.forEach(function (code) {
-                    $("#listCE").append('<li><label class="count">' +
+                    $("#listCE").append('<li><label class="count noselect">' +
                         ($('ul#listCE > li').length + 1).numberFormat('000') +
                         ': </label><label class="codeCE">' +
                         pattCE.exec(code)[0] +
