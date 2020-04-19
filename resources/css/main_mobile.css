@@ -490,7 +490,8 @@ input:focus, textarea, button {
 }
 
 .cam_box .box{
-  background-color: #38373c;
+  background-color: var(--secondary-color);
+  filter: brightness(125%);
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
 
   border-radius: 5px;
