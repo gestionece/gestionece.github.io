@@ -80,6 +80,8 @@ input.switch  {
   width: 1.65em;
   position: relative;
   margin: 0.15em 0;
+
+  cursor: pointer;
 }
 
 .switch::before {
@@ -126,6 +128,7 @@ input.switch:checked::before {
 input.switch:disabled::before,
 input.switch:disabled::after {
   background-color: #424242;/*#ccc;*/
+  cursor: not-allowed;
 }
 /* End Swich*/
 
@@ -345,6 +348,8 @@ input:focus, textarea, button {
   border-bottom: 1px solid var(--textBlack-color);
 
   font-size: 1.34375em;
+
+  color: var(--textBlack-color);
 
   
   width: 90%; /*iphone*/
@@ -614,7 +619,6 @@ input:focus, textarea, button {
 
 .options_box .wrap_a2hs {
   padding: 0;
-  display: none;
   
   margin-top: 22px;
 }
