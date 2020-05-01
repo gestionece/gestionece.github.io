@@ -103,9 +103,8 @@
                             <div class="container_opt">
                                 <h2>General:</h2>
                                 <div class="option-switch">
-                                    <label>DarkMode:</label>
-                                    <input id="o-DarkMode" onchange="darkMode();" class="switch right" type="checkbox"
-                                        checked />
+                                    <label>DarthMode:</label>
+                                    <input id="o-DarthMode" onmouseover="/*if ($('#o-DarthMode')[0].checked == false) new Audio('/resources/sound/DarthGiveYourself.wav').play();*/" onchange="darthMode();" class="switch right" type="checkbox" />
                                 </div>
                                 <div class="option-switch">
                                     <label>SoundOn:</label>
@@ -190,6 +189,9 @@
             <label class="text">Text</label>
         </div>
 
+        <div style="display: none;    position: fixed; top: 0; bottom: 0; left: 0; right: 0; background-color: rgba(0, 0, 0, 0.5);z-index: 1;">
+            <div class="DarthVader"></div>
+        </div>
     </div>
 
     <!-- Script -->
