@@ -38,21 +38,17 @@ function loadConfig() {
     }
 }
 
-function removeLastChar(string) {
-    return string.substring(0, string.length - 1)
-}
-
 function updateConfig() {
     if (typeof (Storage) !== "undefined") {
         var Config = {};
         $('[id^="o-"]').each(function (index) {
-            var nameOption = removeLastChar($(this).prev().text());
-            if (Boolean(nameOption)) {
-                Config[nameOption] = $(this)[0].checked;
-            } else {
-                nameOption = removeLastChar($(this).parent().prev('label').text());
+            var nameOption = ($(this)[0].id).substring(2, ($(this)[0].id).length); //removeLastChar($(this).prev().text());
+
+            if ( typeof( $(this)[0].checked ) !== "boolean") {
                 Config[nameOption] = $(this)[0].value;
-            }  
+            } else {
+                Config[nameOption] = $(this)[0].checked;
+            }
         });
         localStorage.Config = JSON.stringify(Config);
     } else {
@@ -102,35 +98,18 @@ function updateCodeScan() {
 }
 
 function darthMode(params) {
-    if ($('#o-DarthMode')[0].checked == true){
+    if ($('#o-DarkMode')[0].checked == true){
         new Audio("/resources/sound/DarthGiveYourself.wav").play();
         $('.darthVader_box').fadeIn().delay(2800).fadeOut();
     }
-
-    darkMode();
 }
 
 function darkMode() {
-    if ($('#o-DarthMode')[0].checked == true) {
+    if ($('#o-DarkMode')[0].checked == true) {
         $('html').addClass("__dark-mode");
     } else {
         $('html').removeClass("__dark-mode");
     }
-    
-    /*let root = document.documentElement;         
-    if ($('#o-DarkMode')[0].checked == true) {   
-        root.style.setProperty('--primary-color', "#4CAF50");
-        root.style.setProperty('--secondary-color', "#3A4750"); 
-        
-        root.style.setProperty('--textWhite-color', "#ffffff");
-        root.style.setProperty('--textBlack-color', "#000000");
-    } else {
-        root.style.setProperty('--primary-color', "#2388d0");
-        root.style.setProperty('--secondary-color', "#c8d0d6"); 
-        
-        root.style.setProperty('--textWhite-color', "#000000");
-        root.style.setProperty('--textBlack-color', "#ffffff");
-    }*/
 }
 //End Storage
 
