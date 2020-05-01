@@ -101,14 +101,10 @@ function updateCodeScan() {
     }
 }
 
-/*PNG https://www.iconfinder.com/icons/1626615/anakin_darth_jedi_sith_skywalker_star_wars_vader_icon*/
-/*Sound http://starwarz.tripod.com/sounds.html */
-
 function darthMode(params) {
     if ($('#o-DarthMode')[0].checked == true){
-        //new Audio("/resources/sound/DarthSkills.wav").play();
         new Audio("/resources/sound/DarthGiveYourself.wav").play();
-        $('body > div > div:nth-child(7)').fadeIn().delay(2800).fadeOut();
+        $('.darthVader_box').fadeIn().delay(2800).fadeOut();
     }
 
     darkMode();
