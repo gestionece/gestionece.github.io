@@ -127,17 +127,17 @@ function listCam() {
 
 function playSound(status) {
     if ($('#o-SoundOn')[0].checked == true) {
-        var sound = new Audio("/resources/sound/beep_accept.wav");
+        var sound = new Audio("resources/sound/beep_accept.wav");
 
         switch (status) {
             case "error":
-                sound = new Audio("/resources/sound/beep_error.wav");
+                sound = new Audio("resources/sound/beep_error.wav");
                 break;
             case "alert":
-                sound = new Audio("/resources/sound/beep_alert.wav");
+                sound = new Audio("resources/sound/beep_alert.wav");
                 break;
             case "accept":
-                sound = new Audio("/resources/sound/beep_accept.wav");
+                sound = new Audio("resources/sound/beep_accept.wav");
                 break;
         }
         sound.play();
