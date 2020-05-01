@@ -34,7 +34,7 @@
 
     <!-- DarkMode -->
     <script>
-        if (JSON.parse(localStorage.Config).DarkMode == true)
+        if (localStorage.Config && JSON.parse(localStorage.Config).DarkMode == true)
             document.documentElement.classList.add("__dark-mode");
     </script>
 
