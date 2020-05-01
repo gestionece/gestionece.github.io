@@ -6,13 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-
+    <!-- The Open Graph protocol -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="Gestione contatori Enel">
     <meta property="og:url" content="https://gestionece.github.io">
     <meta property="og:image" content="https://gestionece.github.io/resources/img/icon.png">
-
-
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/png" href="resources/img/favicon.png">
@@ -24,14 +22,21 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-    <link rel="manifest" href="manifest.webmanifest">
-
     <!-- Fonts -->
     <link href="resources/css/fontawesome.all.min.css" rel="stylesheet">
     <link href="resources/css/robotomono.bold.regular.css" rel="stylesheet">
 
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="resources/css/main_mobile.css">
+
+    <!-- Manifest -->
+    <link rel="manifest" href="manifest.webmanifest">
+
+    <!-- DarkMode -->
+    <script>
+        if (JSON.parse(localStorage.Config).DarkMode == true)
+            document.documentElement.classList.add("__dark-mode");
+    </script>
 
     <title>Gestione CE</title>
 </head>
@@ -62,7 +67,8 @@
             </div>
             <div class="button_wrap">
                 <div class="button_toggle">
-                    <button id="whatsapp" class="toggle-btn"><i class="fab fa-whatsapp fa-lg" style="font-size: 25px;"></i></button>
+                    <button id="whatsapp" class="toggle-btn"><i class="fab fa-whatsapp fa-lg"
+                            style="font-size: 25px;"></i></button>
                     <button id="download" class="toggle-btn"><i class="fas fa-file-download fa-lg"></i></button>
                     <button id="newFile" class="toggle-btn"><i class="far fa-file fa-lg"></i></button>
                     <button id="camera" class="toggle-btn" style="display: none;"><i
@@ -103,15 +109,21 @@
                                 <h2>General:</h2>
                                 <div class="option-switch">
                                     <label>DarthMode:</label>
-                                    <input id="o-DarkMode" onchange="darthMode(); darkMode();" class="switch right" type="checkbox" />
+                                    <input id="o-DarkMode" onchange="darthMode(); darkMode();" class="switch right"
+                                        type="checkbox" />
                                 </div>
                                 <div class="option-switch">
                                     <label>SoundOn:</label>
                                     <input id="o-SoundOn" class="switch right" type="checkbox" checked />
                                 </div>
+                                <div class="option-text">
+                                    <label>Version:</label>
+                                    <label class="right">1.0.1v</label>
+                                </div>
                             </div>
 
-                            <div id="opWrapCamera" class="container_opt" style="display: none; z-index: 1;"> <!-- temporarily z-index: 1;-->
+                            <div id="opWrapCamera" class="container_opt" style="display: none; z-index: 1;">
+                                <!-- temporarily z-index: 1;-->
                                 <h2>Camera:</h2>
                                 <div class="option-select">
                                     <label>SourceCam:</label>
@@ -189,7 +201,7 @@
         </div>
 
         <div class="darthVader_box">
-            <div class="DarthVader"></div>
+            <div></div>
         </div>
     </div>
 
