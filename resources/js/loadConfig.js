@@ -99,8 +99,19 @@ function updateCodeScan() {
 
 function darthMode(params) {
     if ($('#o-DarkMode')[0].checked == true){
-        new Audio("/resources/sound/DarthGiveYourself.wav").play();
+        new Audio("resources/sound/DarthGiveYourself.wav").play();
         $('.darthVader_box').fadeIn().delay(2800).fadeOut();
+
+        $('.darthVader_box div').addClass("DarthVader").delay(3800).queue(function(){
+            $(this).removeClass("DarthVader").dequeue();
+        });
+    } else {
+        new Audio("resources/sound/OWKUseForce.wav").play();
+        $('.darthVader_box').fadeIn().delay(2800).fadeOut();
+
+        $('.darthVader_box div').addClass("Kenobi").delay(3800).queue(function(){
+            $(this).removeClass("Kenobi").dequeue();
+        });
     }
 }
 
