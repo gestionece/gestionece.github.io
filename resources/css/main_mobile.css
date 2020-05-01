@@ -8,7 +8,7 @@
 
 .__dark-mode:root, .__dark-mode {
   /* Dark mode */
-  --primary-color: #4CAF50;
+  --primary-color: #AF4C4C;/*#4CAF50;*/
   --secondary-color: #3A4750;
   --textWhite-color: #ffffff;
   --textBlack-color: #000000;
@@ -289,7 +289,7 @@ input:focus, textarea, button {
   background-color: transparent;
   border: none;
   font-size: 1.375em;
-  padding: 20px 22px;
+  margin: 20px 22px;
 }
 /* End Top Bar */
 
