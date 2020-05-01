@@ -5,13 +5,16 @@
   --textWhite-color: #000000;
   --textBlack-color: #ffffff;
 }
-
 .__dark-mode:root, .__dark-mode {
   /* Dark mode */
   --primary-color: #AF4C4C;/*#4CAF50;*/
   --secondary-color: #3A4750;
   --textWhite-color: #ffffff;
   --textBlack-color: #000000;
+}
+
+.dashboard_mobile {
+  transition: background-color 0.5s ease-out;
 }
 
 /* darkMode */
