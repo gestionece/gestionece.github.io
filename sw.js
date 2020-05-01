@@ -46,7 +46,9 @@ self.addEventListener('install', e => {
  
         '/resources/sound/beep_accept.wav',
         '/resources/sound/beep_alert.wav',
-        '/resources/sound/beep_error.wav'
+        '/resources/sound/beep_error.wav',
+        '/resources/sound/DarthGiveYourself.wav',
+        '/resources/sound/DarthSkills.wav'
 
       ]).then(() => self.skipWaiting());
     })
