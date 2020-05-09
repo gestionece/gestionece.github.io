@@ -102,9 +102,9 @@ function darthMode(params) {
         new Audio("resources/sound/DarthGiveYourself.wav").play();
         $('.darthVader_box').fadeIn().delay(2800).fadeOut();
 
-        $('.darthVader_box div').addClass("DarthVader").delay(3800).queue(function(){
+        /*$('.darthVader_box div').addClass("DarthVader").delay(3800).queue(function(){
             $(this).removeClass("DarthVader").dequeue();
-        });
+        });*/
     }
 }
 
