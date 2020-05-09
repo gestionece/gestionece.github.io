@@ -414,6 +414,7 @@ $(document).ready(function () {
 
 
         } else {
+            showPopUp("Not Recognized:", value, 250)
             playSound("error");
         }
     }
