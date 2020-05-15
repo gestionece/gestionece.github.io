@@ -289,7 +289,7 @@ $(document).ready(function () {
                     JSON.parse(localStorage.CodeScan).CodeCE.forEach(function (code) {
                         MsgWhatsApp += '%0D%0A' + code;
                     });
-                    window.open("https://wa.me/?text=" + MsgWhatsApp, '_blank').focus();
+                    window.open("https://api.whatsapp.com/send?text=" + MsgWhatsApp, '_blank').focus();
                 }
             });
         return false;
