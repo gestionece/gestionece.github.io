@@ -274,6 +274,13 @@ $(document).ready(function () {
 
     //Add Code
 
+    // Start click version
+    $('#version').on('click', function () {
+        swal({ title: "Aggiornamenti:", text: "1.0.1 - prima versione stabile; \n 1.1.0 - [ADD] Caricamento del file;"});
+        return false;
+    });
+    // End click version
+
     // Start click whatsapp
     $('#whatsapp').on('click', function () {
         swal({
@@ -385,7 +392,7 @@ $(document).ready(function () {
                     localStorage.removeItem('CodeScan');
                     loadCodeScan();
 
-                    swal({ icon: "success", timer: 1000, });
+                    swal({title: "Vuoi creare nuovo file?", icon: "success" });
                 }
             });
         return false;
