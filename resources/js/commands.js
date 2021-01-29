@@ -321,6 +321,55 @@ $(document).ready(function () {
     });
     // End click download
 
+    // Start click upload
+    $('#upload').on('click', function () {
+        swal({
+            title: "Vuoi caricare il file?",
+            icon: "warning",
+            dangerMode: true,
+            buttons: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+
+                    localStorage.removeItem('CodeScan');
+                    loadCodeScan();
+
+                    var input = document.createElement('input');
+                    input.type = 'file';
+                    input.accept = '.txt';
+
+                    input.onchange = e => {
+
+                        // getting a hold of the file reference
+                        var file = e.target.files[0];
+
+                        // setting up the reader
+                        var reader = new FileReader();
+                        reader.readAsText(file, 'UTF-8');
+
+                        // here we tell the reader what to do when it's done reading...
+                        reader.onload = readerEvent => {
+                            var content = readerEvent.target.result.split('\n'); // this is the content!
+
+                            if (pattCP.test(content[0]) || content[0] == "ID Carton Pallet") {
+                                content.forEach(element => {
+                                    AddCE(element, false);
+                                });
+                                swal({ icon: "success", timer: 1000, });
+                            } else {
+                                swal({ icon: "error", timer: 1000, });
+                            }
+                        }
+                    }
+
+                    input.click();
+                }
+            });
+        return false;
+    });
+    // End click upload
+
     // Start click newFile
     $('#newFile').on('click', function () {
 
@@ -353,7 +402,7 @@ $(document).ready(function () {
     });
 
     /* Start Add CE to List*/
-    function AddCE(value) {
+    function AddCE(value, effect = true) {
 
         value = value.toUpperCase();
 
@@ -366,16 +415,20 @@ $(document).ready(function () {
                 $('ul#listCE li').each(function () {
                     if (pattCE.exec($(this).text())[0] == ceCode) {
                         exist = true;
-                        playSound("error");
-                        showPopUp("Exist:", ceCode, 250);
+                        if (effect == true) {
+                            playSound("error");
+                            showPopUp("Exist:", ceCode, 250);
+                        }
                         return false;
                     }
                 });
             }
 
             if (exist == false) {
-                playSound("accept");
-                showPopUp("Add:", ceCode, 250)
+                if (effect == true) {
+                    playSound("accept");
+                    showPopUp("Add:", ceCode, 250)
+                }
 
                 $("#listCE").append('<li><label class="count noselect">' +
                     ($('ul#listCE li').length + 1).numberFormat('000') +
@@ -394,7 +447,9 @@ $(document).ready(function () {
 
         } else if (pattCP.test(value)) {
 
-            playSound("alert");
+            if (effect == true) {
+                playSound("alert");
+            }
 
             const cpCode = pattCP.exec(value)[0];
 
@@ -408,14 +463,18 @@ $(document).ready(function () {
                     if (willDelete) {
                         $('.top_nav .codeCP').children('b').text(cpCode);
                         updateCodeScan();
-                        showPopUp("Set Carton Pallet:", cpCode, 500)
+                        if (effect == true) {
+                            showPopUp("Set Carton Pallet:", cpCode, 500);
+                        }
                     }
                 });
 
 
         } else {
-            showPopUp("Not Recognized:", value, 250)
-            playSound("error");
+            if (effect == true) {
+                showPopUp("Not Recognized:", value, 250)
+                playSound("error");
+            }
         }
     }
     /* End Add CE to List*/
