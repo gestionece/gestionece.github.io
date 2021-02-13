@@ -301,7 +301,7 @@ input:focus, textarea, button {
   background-color: transparent;
   border: none;
   font-size: 1.375em;
-  margin: 20px 22px;
+  margin: 20px 10px;
 }
 /* End Top Bar */
 
