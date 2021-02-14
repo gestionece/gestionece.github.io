@@ -296,6 +296,29 @@ $(document).ready(function () {
     document.querySelector('#share').addEventListener('click', async () => {
         try {
 
+
+
+
+            const file = new File(["foo bar"], "foobar.txt", { type: "text/plain"} );
+
+            if (navigator.canShare && navigator.canShare({ files: [file] })) {
+                navigator.share({
+                    files: [file],
+                    title: 'Dummy text file',
+                    text: 'Some dummy text file',
+                })
+                    .then(() => console.log('Share was successful.'))
+                    .catch((error) => console.log('Sharing failed', error.message));
+            }
+            else {
+                console.log("can't share this");
+            }
+
+
+
+
+
+
             /*var data = JSON.parse(localStorage.CodeScan).CodeCP;
             JSON.parse(localStorage.CodeScan).CodeCE.forEach(function (code) {
                 data += '\n' + code;
@@ -307,15 +330,16 @@ $(document).ready(function () {
 
 
 
-            const base64url = "data:text/plain;base64,SGVsbG8sIFdvcmxkIQ==";
+            /*const base64url = "data:text/plain;base64,SGVsbG8sIFdvcmxkIQ==";
             const blob = await (await fetch(base64url)).blob();
             const file = new File([blob], 'fileName.txt', { type: blob.type });
+            console.log([blob]);
             console.log([file]);
             navigator.share({
               title: 'Scan',
               text: 'Check out this image!',
               files: [file],
-            })
+            })*/
 
 
 
