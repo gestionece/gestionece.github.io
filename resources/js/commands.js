@@ -276,7 +276,7 @@ $(document).ready(function () {
 
     // Start click version
     $('#version').on('click', function () {
-        swal({ title: "Aggiornamenti:", text: "1.0.1 - prima versione stabile; \n 1.1.0 - [ADD] Caricamento del file;"});
+        swal({ title: "Aggiornamenti:", text: "1.0.1 - prima versione stabile; \n 1.1.0 - [ADD] Caricamento del file; \n 1.1.1 - [EDIT] Spostato tasto condividi;"});
         return false;
     });
     // End click version
