@@ -290,7 +290,7 @@ input:focus, textarea, button {
   float: left;
   color: var(--textBlack-color);
   text-align: center;
-  padding: 20px 0 20px 22px;
+  padding: 20px 0 20px 10px;
   text-decoration: none;
   font-size: 1.375em;
 
