@@ -229,7 +229,18 @@ $(document).ready(function () {
 
 
                 } else {
-                    swal("Please select SourceCam", "", "error");
+                    swal({
+                        title: "Please select SourceCam",
+                        icon: "error",
+                    })
+                        .then((willDelete) => {
+                            if (willDelete) {
+                                $(".options_box").fadeIn("fast", "linear", function () {
+                                    $(".options_box .box").addClass("on");
+                                });
+                            }
+                        });
+                    //swal("Please select SourceCam", "", "error");
                 }
             });
 
