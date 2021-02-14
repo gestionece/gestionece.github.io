@@ -295,12 +295,27 @@ $(document).ready(function () {
     // Must be triggered some kind of "user activation"
     document.querySelector('#share').addEventListener('click', async () => {
         try {
+
+
+
+            const base64url = "data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==";
+            const blob = await (await fetch(base64url)).blob();
+            const file = new File([blob], 'fileName.png', { type: blob.type });
+            navigator.share({
+              title: 'Hello',
+              text: 'Check out this image!',
+              files: [file],
+            })
+
+
+
+            /*
             var shareData = JSON.parse(localStorage.CodeScan).CodeCP;
             JSON.parse(localStorage.CodeScan).CodeCE.forEach(function (code) {
                 shareData += '%0D%0A' + code;
             });
 
-            //if (navigator.share) {
+            if (navigator.share) {
                 navigator.share({
                   //title: 'My awesome post!',
                   text: shareData,
@@ -311,10 +326,12 @@ $(document).ready(function () {
                 .catch(err => {
                   console.log(`Couldn't share because of`, err.message);
                 });
-              //} else {
-                //console.log('web share not supported');
-                //alert('web share not supported');
-              //}
+              } else {
+                console.log('web share not supported');
+                alert('web share not supported');
+              }*/
+
+
         } catch (err) {
 
         }
