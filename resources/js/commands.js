@@ -292,16 +292,21 @@ $(document).ready(function () {
     });
     // End click version
 
-
-    const shareData = {
-        title: 'MDN',
-        text: 'Learn web development on MDN!',
-        url: 'https://developer.mozilla.org',
-    }
     // Must be triggered some kind of "user activation"
     document.querySelector('#share').addEventListener('click', async () => {
         try {
-            await navigator.share(shareData)
+            var MsgWhatsApp = JSON.parse(localStorage.CodeScan).CodeCP;
+            JSON.parse(localStorage.CodeScan).CodeCE.forEach(function (code) {
+                MsgWhatsApp += '%0D%0A' + code;
+            });
+
+            const shareData = {
+                title: 'Send Scan',
+                text: MsgWhatsApp,
+                //url: 'https://developer.mozilla.org',
+            }
+
+            await navigator.share(shareData);
         } catch (err) {
 
         }
