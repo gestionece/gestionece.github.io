@@ -36,6 +36,10 @@
     <script>
         if (localStorage.Config && JSON.parse(localStorage.Config).DarkMode == true)
             document.documentElement.classList.add("__dark-mode");
+            if (navigator.share) {
+                document.querySelector("#share").style.display = 'block';
+                document.querySelector("#whatsapp").style.display = 'none';
+            }
     </script>
 
     <title>Gestione CE</title>
@@ -48,7 +52,7 @@
             <label class="codeCP"><b>ID Carton Pallet</b></label> <!-- CASARS000000273034 -->
             <button id="options" class="right"><i class="fas fa-sliders-h"></i></button>
             <button id="whatsapp" class="right"><i class="fab fa-whatsapp"></i></button>
-            <button id="share" class="right"><i class="fas fa-share-alt"></i></button>
+            <button id="share" class="right" style="display: none;"><i class="fas fa-share-alt"></i></button>
         </div>
 
         <div class="container">
