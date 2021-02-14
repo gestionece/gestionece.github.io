@@ -40,9 +40,9 @@ self.addEventListener('install', e => {
         '/resources/img/favicon.png',
         '/resources/img/icon.png',
  
-        //'/resources/js/commands.js',
-        //'/resources/js/library.js',
-        //'/resources/js/webapp.js', 
+        '/resources/js/commands.js',
+        '/resources/js/library.js',
+        '/resources/js/webapp.js', 
  
         '/resources/sound/beep_accept.wav',
         '/resources/sound/beep_alert.wav',
