@@ -299,15 +299,16 @@ $(document).ready(function () {
         url: 'https://developer.mozilla.org',
     }
     // Must be triggered some kind of "user activation"
-    document.querySelector('#whatsapp').addEventListener('click', async () => {
+    document.querySelector('#share').addEventListener('click', async () => {
         try {
             await navigator.share(shareData)
         } catch (err) {
+
         }
     });
 
     // Start click whatsapp
-    /*$('#whatsapp').on('click', async, function () {
+    $('#whatsapp').on('click', function () {
         swal({
             title: "Vuoi condividere su WhatsApp?",
             icon: "warning",
@@ -326,7 +327,7 @@ $(document).ready(function () {
                 }
             });
         return false;
-    });*/
+    });
     // End click whatsapp
 
     // Start click download
