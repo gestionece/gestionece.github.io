@@ -287,7 +287,7 @@ $(document).ready(function () {
 
     // Start click version
     $('#version').on('click', function () {
-        swal({ title: "Aggiornamenti:", text: "1.0.1 - prima versione stabile; \n 1.1.0 - [ADD] Caricamento del file; \n 1.1.1 - [EDIT] Spostato tasto condividi; \n \s\s\s\s\s\s- [Add] FilterMode;"});
+        swal({ title: "Aggiornamenti:", text: "1.0.1 - prima versione stabile; \n 1.1.0 - [ADD] Caricamento del file; \n 1.1.1 - [EDIT] Spostato tasto condividi; \n \t - [Add] FilterMode;"});
         return false;
     });
     // End click version
