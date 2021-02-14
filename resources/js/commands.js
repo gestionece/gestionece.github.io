@@ -295,18 +295,26 @@ $(document).ready(function () {
     // Must be triggered some kind of "user activation"
     document.querySelector('#share').addEventListener('click', async () => {
         try {
-            var MsgWhatsApp = JSON.parse(localStorage.CodeScan).CodeCP;
+            var shareData = JSON.parse(localStorage.CodeScan).CodeCP;
             JSON.parse(localStorage.CodeScan).CodeCE.forEach(function (code) {
-                MsgWhatsApp += '%0D%0A' + code;
+                shareData += '%0D%0A' + code;
             });
 
-            const shareData = {
-                title: 'Send Scan',
-                text: MsgWhatsApp,
-                //url: 'https://developer.mozilla.org',
-            }
-
-            await navigator.share(shareData);
+            if (navigator.share) {
+                navigator.share({
+                  title: 'My awesome post!',
+                  text: 'This post may or may not contain the answer to the universe',
+                  url: window.location.href
+                }).then(() => {
+                  console.log('Thanks for sharing!');
+                })
+                .catch(err => {
+                  console.log(`Couldn't share because of`, err.message);
+                });
+              } else {
+                console.log('web share not supported');
+                alert('web share not supported');
+              }
         } catch (err) {
 
         }
