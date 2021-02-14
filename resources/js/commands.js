@@ -303,11 +303,29 @@ $(document).ready(function () {
             .then((willDelete) => {
                 if (willDelete) {
 
-                    var MsgWhatsApp = JSON.parse(localStorage.CodeScan).CodeCP;
+                    /*var MsgWhatsApp = JSON.parse(localStorage.CodeScan).CodeCP;
                     JSON.parse(localStorage.CodeScan).CodeCE.forEach(function (code) {
                         MsgWhatsApp += '%0D%0A' + code;
                     });
-                    window.open("https://api.whatsapp.com/send?text=" + MsgWhatsApp, '_blank').focus();
+                    window.open("https://api.whatsapp.com/send?text=" + MsgWhatsApp, '_blank').focus();*/
+
+                    const shareData = {
+                        title: 'MDN',
+                        text: 'Learn web development on MDN!',
+                        url: 'https://developer.mozilla.org',
+                      }
+
+
+                      try {
+                        await navigator.share(shareData)
+                        console.log('MDN shared successfully');
+                      } catch(err) {
+                        console.log('Error: ' + err);
+                      }
+
+
+
+
                 }
             });
         return false;
