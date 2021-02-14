@@ -297,7 +297,7 @@ input:focus, textarea, button {
   box-shadow: none;
 }
 
-.dashboard_mobile .top_nav button#options {
+.dashboard_mobile .top_nav button {
   background-color: transparent;
   border: none;
   font-size: 1.375em;
