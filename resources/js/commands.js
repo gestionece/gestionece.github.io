@@ -287,7 +287,7 @@ $(document).ready(function () {
 
     // Start click version
     $('#version').on('click', function () {
-        swal({ title: "Aggiornamenti:", text: "1.0.1 - prima versione stabile; \n 1.1.0 - [ADD] Caricamento del file; \n 1.1.1 - [EDIT] Spostato tasto condividi;"});
+        swal({ title: "Aggiornamenti:", text: "1.0.1 - prima versione stabile; \n 1.1.0 - [ADD] Caricamento del file; \n 1.1.1 - [EDIT] Spostato tasto condividi; \n \s\s\s\s\s\s- [Add] FilterMode;"});
         return false;
     });
     // End click version
@@ -421,6 +421,28 @@ $(document).ready(function () {
 
     /* Start Add CE to List*/
     function AddCE(value, effect = true) {
+
+        if ($('#o-FilterMode')[0].checked == false) {
+            if (effect == true) {
+                playSound("accept");
+                showPopUp("Add:", value, 250)
+            }
+
+            $("#listCE").append('<li><label class="count noselect">' +
+                ($('ul#listCE li').length + 1).numberFormat('000') +
+                ': </label><label class="codeCE">' +
+                value +
+                '</label><i class="fas fa-times"></i></li>');
+
+            if ($('#o-AutoScroll')[0].checked == true) {
+                $('.scrollable-content.containerList').stop().animate({
+                    scrollTop: $('#listCE').outerHeight(true)
+                }, 500, 'swing');
+            }
+
+            updateCodeScan();
+            return false;
+        }
 
         value = value.toUpperCase();
 
