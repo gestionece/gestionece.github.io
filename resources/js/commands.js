@@ -305,8 +305,8 @@ $(document).ready(function () {
             if (navigator.canShare && navigator.canShare({ files: [file] })) {
                 navigator.share({
                     files: [file],
-                    title: 'Dummy text file',
-                    text: 'Some dummy text file',
+                    title: 'File',
+                    text: 'ID CP',
                 })
                     .then(() => console.log('Share was successful.'))
                     .catch((error) => console.log('Sharing failed', error.message));
