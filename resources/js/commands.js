@@ -302,9 +302,9 @@ $(document).ready(function () {
 
             if (navigator.share) {
                 navigator.share({
-                  title: 'My awesome post!',
-                  text: 'This post may or may not contain the answer to the universe',
-                  url: window.location.href
+                  //title: 'My awesome post!',
+                  text: shareData,
+                  //url: window.location.href
                 }).then(() => {
                   console.log('Thanks for sharing!');
                 })
