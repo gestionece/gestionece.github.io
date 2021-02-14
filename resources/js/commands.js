@@ -300,7 +300,7 @@ $(document).ready(function () {
                 shareData += '%0D%0A' + code;
             });
 
-            if (navigator.share) {
+            //if (navigator.share) {
                 navigator.share({
                   //title: 'My awesome post!',
                   text: shareData,
@@ -311,10 +311,10 @@ $(document).ready(function () {
                 .catch(err => {
                   console.log(`Couldn't share because of`, err.message);
                 });
-              } else {
-                console.log('web share not supported');
-                alert('web share not supported');
-              }
+              //} else {
+                //console.log('web share not supported');
+                //alert('web share not supported');
+              //}
         } catch (err) {
 
         }
