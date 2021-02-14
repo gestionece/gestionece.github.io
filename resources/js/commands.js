@@ -298,8 +298,9 @@ $(document).ready(function () {
 
 
 
-
-            const file = new File(["foo bar"], "foobar.txt", { type: "text/plain"} );
+            const base64url = "data:text/plain;base64,SGVsbG8sIFdvcmxkIQ==";
+            const blob = await (await fetch(base64url)).blob();
+            const file = new File([blob], "foobar.txt", { type: "text/plain"} );
 
             if (navigator.canShare && navigator.canShare({ files: [file] })) {
                 navigator.share({
