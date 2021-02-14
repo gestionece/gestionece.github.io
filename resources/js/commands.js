@@ -296,13 +296,23 @@ $(document).ready(function () {
     document.querySelector('#share').addEventListener('click', async () => {
         try {
 
+            /*var data = JSON.parse(localStorage.CodeScan).CodeCP;
+            JSON.parse(localStorage.CodeScan).CodeCE.forEach(function (code) {
+                data += '\n' + code;
+            });
+            var type = ".txt";
+            var file = new Blob([data], { type: type });
+            url = URL.createObjectURL(file);
+            console.log(url);*/
 
 
-            const base64url = "data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg==";
+
+            const base64url = "data:text/plain;base64,SGVsbG8sIFdvcmxkIQ==";
             const blob = await (await fetch(base64url)).blob();
-            const file = new File([blob], 'fileName.png', { type: blob.type });
+            const file = new File([blob], 'fileName.txt', { type: blob.type });
+            console.log([file]);
             navigator.share({
-              title: 'Hello',
+              title: 'Scan',
               text: 'Check out this image!',
               files: [file],
             })
